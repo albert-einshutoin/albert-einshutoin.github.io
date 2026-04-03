@@ -2,7 +2,7 @@
 title = "標準的な Web スタックを超える画像パイプラインの設計"
 date = 2026-02-20
 description = "Web 画像処理がなぜ必要以上に難しいのか、そしてより良いパイプラインの姿。"
-template = "note-page.html"
+template = "blog-page.html"
 
 [taxonomies]
 tags = ["image-processing", "architecture", "oss"]

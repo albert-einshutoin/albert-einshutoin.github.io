@@ -2,7 +2,7 @@
 title = "AI 時代に低レイヤー OSS が重要である理由"
 date = 2026-03-15
 description = "AI は上に構築されるものを変えるが、その下のレイヤーは変わらない。"
-template = "note-page.html"
+template = "blog-page.html"
 
 [taxonomies]
 tags = ["oss", "architecture", "ai-engineering"]

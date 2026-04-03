@@ -2,7 +2,7 @@
 title = "Designing image pipelines beyond default web stacks"
 date = 2026-02-20
 description = "Why most web image processing is harder than it needs to be, and what a better pipeline looks like."
-template = "note-page.html"
+template = "blog-page.html"
 
 [taxonomies]
 tags = ["image-processing", "architecture", "oss"]

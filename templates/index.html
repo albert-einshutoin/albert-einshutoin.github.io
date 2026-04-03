@@ -82,18 +82,18 @@
   </div>
 </section>
 
-{# Recent Notes #}
-{% set notes_section = get_section(path="notes/_index.md", lang=lang) %}
+{# Recent blog posts #}
+{% set blog_section = get_section(path="blog/_index.md", lang=lang) %}
 <section class="section">
   <div class="container">
     <div class="section__header">
-      <h2 class="section__title">{{ trans(key="section_notes", lang=lang) }}</h2>
-      <a href="{{ get_url(path='@/notes/_index.md', lang=lang) }}" class="section__link">{{ trans(key="view_all", lang=lang) }}</a>
+      <h2 class="section__title">{{ trans(key="section_blog", lang=lang) }}</h2>
+      <a href="{{ get_url(path='@/blog/_index.md', lang=lang) }}" class="section__link">{{ trans(key="view_all", lang=lang) }}</a>
     </div>
-    <div class="notes-list">
-      {% for page in notes_section.pages | sort(attribute="date") | reverse %}
+    <div class="blog-list">
+      {% for page in blog_section.pages | sort(attribute="date") | reverse %}
       {% if loop.index <= 3 %}
-      {% include "partials/note-item.html" %}
+      {% include "partials/blog-item.html" %}
       {% endif %}
       {% endfor %}
     </div>

@@ -2,7 +2,7 @@
 title = "Thoughts on edge security as a software layer"
 date = 2026-01-10
 description = "Edge security should be treated as a composable, testable software layer — not a collection of ad-hoc rules."
-template = "note-page.html"
+template = "blog-page.html"
 
 [taxonomies]
 tags = ["edge", "architecture", "security"]

@@ -486,13 +486,13 @@ main {
   opacity: 0.5;
 }
 
-// === Note List ===
-.notes-list {
+// === Blog list ===
+.blog-list {
   display: flex;
   flex-direction: column;
 }
 
-.note-item {
+.blog-item {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
@@ -507,7 +507,7 @@ main {
   }
 }
 
-.note-item__title {
+.blog-item__title {
   font-size: 1rem;
   font-weight: 500;
 
@@ -520,14 +520,14 @@ main {
   }
 }
 
-.note-item__date {
+.blog-item__date {
   font-family: $font-mono;
   font-size: 0.72rem;
   color: $text-muted;
   white-space: nowrap;
 }
 
-.note-item__tags {
+.blog-item__tags {
   display: flex;
   gap: 0.4rem;
   margin-top: 0.3rem;
@@ -894,7 +894,7 @@ p.about-intro {
     grid-template-columns: 1fr;
   }
 
-  .note-item {
+  .blog-item {
     flex-direction: column;
     gap: 0.35rem;
   }

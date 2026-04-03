@@ -2,7 +2,7 @@
 title = "ソフトウェアレイヤーとしてのエッジセキュリティを考える"
 date = 2026-01-10
 description = "エッジセキュリティはアドホックなルールの集合ではなく、コンポーザブルでテスト可能なソフトウェアレイヤーとして扱うべき。"
-template = "note-page.html"
+template = "blog-page.html"
 
 [taxonomies]
 tags = ["edge", "architecture", "security"]

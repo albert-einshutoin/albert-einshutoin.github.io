@@ -6,7 +6,7 @@
     <nav class="site-nav">
       {% set path = current_path | default(value="/") %}
       <a href="{{ get_url(path='@/projects/_index.md', lang=lang) }}" {% if path is starting_with("/projects") or path is starting_with("/ja/projects") %}class="active"{% endif %}>{{ trans(key="nav_projects", lang=lang) }}</a>
-      <a href="{{ get_url(path='@/notes/_index.md', lang=lang) }}" {% if path is starting_with("/notes") or path is starting_with("/ja/notes") %}class="active"{% endif %}>{{ trans(key="nav_notes", lang=lang) }}</a>
+      <a href="{{ get_url(path='@/blog/_index.md', lang=lang) }}" {% if path is starting_with("/blog") or path is starting_with("/ja/blog") %}class="active"{% endif %}>{{ trans(key="nav_blog", lang=lang) }}</a>
       <a href="{{ get_url(path='@/stack.md', lang=lang) }}" {% if path is starting_with("/stack") or path is starting_with("/ja/stack") %}class="active"{% endif %}>{{ trans(key="nav_stack", lang=lang) }}</a>
       <a href="{{ get_url(path='@/about.md', lang=lang) }}" {% if path is starting_with("/about") or path is starting_with("/ja/about") %}class="active"{% endif %}>{{ trans(key="nav_about", lang=lang) }}</a>
       <a href="{{ config.extra.github }}" class="external" target="_blank" rel="noopener">{{ trans(key="nav_github", lang=lang) }}</a>

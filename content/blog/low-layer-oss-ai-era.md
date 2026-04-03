@@ -2,7 +2,7 @@
 title = "Why low-layer OSS matters in the AI era"
 date = 2026-03-15
 description = "AI changes what we build on top of, but not the layers underneath."
-template = "note-page.html"
+template = "blog-page.html"
 
 [taxonomies]
 tags = ["oss", "architecture", "ai-engineering"]

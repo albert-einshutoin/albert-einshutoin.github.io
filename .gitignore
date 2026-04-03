@@ -1,5 +1,27 @@
+# Zola
 public/
+
+# OS
 .DS_Store
+.AppleDouble
+.LSOverride
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Editors / IDEs
+.idea/
+*.iml
+.fleet/
 *.swp
 *.swo
 *~
+
+# Local env & secrets (never commit)
+.env
+.env.*
+!.env.example
+
+# Logs & caches
+*.log
+.cache/

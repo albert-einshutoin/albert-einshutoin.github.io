@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}{{ page.title }} — {{ config.title }}{% endblock %}
+{% block description %}{{ page.description | default(value=config.description) }}{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="detail-header">
+    <div class="detail-header__meta">
+      {% if page.extra.category %}{{ page.extra.category | upper }}{% endif %}
+      {% if page.extra.status %} · <span class="badge badge--{{ page.extra.status | lower }}">{{ page.extra.status }}</span>{% endif %}
+    </div>
+    <h1 class="detail-header__title">{{ page.title }}</h1>
+  </div>
+  <div class="detail-body">
+    {{ page.content | safe }}
+
+    {% if page.extra.tech %}
+    <h2>{{ trans(key="detail_tech", lang=lang) }}</h2>
+    <div class="detail-tech">
+      {% for t in page.extra.tech %}
+      <span class="tag">{{ t }}</span>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    {% if page.extra.github or page.extra.npm %}
+    <h2>{{ trans(key="detail_links", lang=lang) }}</h2>
+    <div class="detail-links">
+      {% if page.extra.github %}
+      <a href="{{ page.extra.github }}" target="_blank" rel="noopener">github ↗</a>
+      {% endif %}
+      {% if page.extra.npm %}
+      <a href="{{ page.extra.npm }}" target="_blank" rel="noopener">npm ↗</a>
+      {% endif %}
+    </div>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

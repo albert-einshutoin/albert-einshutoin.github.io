@@ -1,0 +1,17 @@
+<div class="note-item">
+  <div>
+    <div class="note-item__title">
+      <a href="{{ page.permalink }}">{{ page.title }}</a>
+    </div>
+    {% if page.taxonomies.tags %}
+    <div class="note-item__tags">
+      {% for tag in page.taxonomies.tags %}
+      <span class="tag">{{ tag }}</span>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </div>
+  <time class="note-item__date" datetime="{{ page.date }}">
+    {{ page.date | date(format="%Y.%m.%d") }}
+  </time>
+</div>

@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}{{ page.title }} — {{ config.title }}{% endblock %}
+{% block description %}{{ page.description | default(value=config.description) }}{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="detail-header">
+    <div class="detail-header__meta">{{ page.date | date(format="%Y.%m.%d") }}</div>
+    <h1 class="detail-header__title">{{ page.title }}</h1>
+  </div>
+  <article class="detail-body">
+    {{ page.content | safe }}
+  </article>
+</div>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}{{ trans(key="page_tags_title", lang=lang) }} — {{ config.title }}{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="page-title">
+    <h1>{{ trans(key="page_tags_title", lang=lang) }}</h1>
+  </div>
+
+  <section class="section">
+    <div class="tags-grid">
+      {% for term in terms %}
+      <a href="{{ term.permalink }}" class="tag tag--lg">
+        {{ term.name }} <span class="tag__count">({{ term.pages | length }})</span>
+      </a>
+      {% endfor %}
+    </div>
+  </section>
+</div>
+{% endblock %}

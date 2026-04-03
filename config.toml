@@ -1,0 +1,115 @@
+base_url = "https://albert-einshutoin.github.io"
+title = "Albert Einshutoin Lab"
+description = "Low-layer OSS, infrastructure design, and experimental systems for the AI era."
+default_language = "en"
+compile_sass = true
+minify_html = true
+generate_feeds = true
+feed_filenames = ["rss.xml"]
+
+taxonomies = [
+  { name = "tags" },
+]
+
+[markdown.highlighting]
+theme = "ayu-dark"
+
+[extra]
+author = "Shuto Ide"
+github = "https://github.com/albert-einshutoin"
+npm = "https://www.npmjs.com/~alberteinshutoin"
+note = "https://note.com/albert_forte"
+twitter = "https://x.com/ForTe_Grapher"
+
+# --- English translations (default) ---
+[translations]
+nav_projects = "projects"
+nav_notes = "notes"
+nav_about = "about"
+nav_github = "github"
+view_all = "view all →"
+
+hero_eyebrow = "Personal Lab"
+hero_title = "I make ideas executable."
+hero_description = "Low-layer OSS, infrastructure design, and experimental systems for the AI era."
+hero_secondary = "Building at the layer where structure matters more than syntax."
+hero_note = "\"Albert\" is a quiet nod to Albert Einstein and first-principles thinking."
+
+section_focus = "Focus Areas"
+section_projects = "Featured Projects"
+section_notes = "Recent Notes"
+
+focus_1_title = "Low-layer OSS"
+focus_1_desc = "Performance-critical libraries bridging Rust and Node.js for real-world production use."
+focus_2_title = "Image Optimization"
+focus_2_desc = "High-throughput image processing pipelines that go beyond default web stacks."
+focus_3_title = "Edge / CDN Security"
+focus_3_desc = "Policy-driven security logic at the edge layer, across multiple cloud providers."
+focus_4_title = "AI-assisted Design"
+focus_4_desc = "Exploring how AI changes the way we architect, test, and maintain systems."
+
+philosophy = "AI commoditizes syntax. Structure, intent, and constraints matter more than ever."
+
+footer_built = "built with zola"
+
+page_projects_title = "Projects"
+page_projects_desc = "OSS, research, and experimental tooling."
+page_notes_title = "Notes"
+page_notes_desc = "Design thinking, technical research, and observations."
+page_about_title = "About"
+page_tags_title = "Tags"
+page_tag_count = "entries"
+
+detail_tech = "Tech Stack"
+detail_links = "Links"
+
+# --- Japanese ---
+[languages.ja]
+title = "Albert Einshutoin Lab"
+description = "低レイヤー OSS、インフラ設計、AI 時代の実験的システム。"
+generate_feeds = true
+feed_filenames = ["rss.xml"]
+taxonomies = [
+  { name = "tags" },
+]
+
+[languages.ja.translations]
+nav_projects = "projects"
+nav_notes = "notes"
+nav_about = "about"
+nav_github = "github"
+view_all = "すべて見る →"
+
+hero_eyebrow = "Personal Lab"
+hero_title = "アイデアを、実行可能にする。"
+hero_description = "低レイヤー OSS、インフラ設計、AI 時代の実験的システム。"
+hero_secondary = "構文よりも構造が重要なレイヤーで、ものをつくる。"
+hero_note = "\"Albert\" は Albert Einstein への静かなリスペクト — 第一原理思考への敬意。"
+
+section_focus = "注力分野"
+section_projects = "主要プロジェクト"
+section_notes = "最近のノート"
+
+focus_1_title = "低レイヤー OSS"
+focus_1_desc = "Rust と Node.js を橋渡しする、プロダクション向けの高性能ライブラリ。"
+focus_2_title = "画像最適化"
+focus_2_desc = "標準的な Web スタックを超える、高スループットな画像処理パイプライン。"
+focus_3_title = "Edge / CDN セキュリティ"
+focus_3_desc = "複数のクラウドプロバイダにまたがる、ポリシー駆動のエッジセキュリティ。"
+focus_4_title = "AI 支援設計"
+focus_4_desc = "AI がアーキテクチャ、テスト、システム保守をどう変えるかを探る。"
+
+philosophy = "AI が構文をコモディティ化する。構造、意図、制約はこれまで以上に重要になる。"
+
+footer_built = "built with zola"
+
+page_projects_title = "Projects"
+page_projects_desc = "OSS、リサーチ、実験的ツール。"
+page_notes_title = "Notes"
+page_notes_desc = "設計思考、技術リサーチ、考察。"
+page_about_title = "About"
+page_tags_title = "タグ"
+page_tag_count = "件"
+
+detail_tech = "技術スタック"
+detail_links = "リンク"

@@ -1,0 +1,854 @@
+// === Variables ===
+$bg-primary: #09090b;
+$bg-secondary: #111114;
+$bg-card: #15151a;
+
+$text-primary: #ececef;
+$text-secondary: #9395a0;
+$text-muted: #5e606a;
+
+$accent: #c9a84c;
+$accent-dim: rgba(#c9a84c, 0.15);
+$accent-glow: rgba(#c9a84c, 0.06);
+
+$border-color: #1f1f24;
+$border-hover: #2e2e35;
+
+$radius-sm: 6px;
+$radius-md: 10px;
+
+$font-heading: 'Instrument Serif', 'Playfair Display', Georgia, serif;
+$font-body: 'Inter', 'Noto Sans JP', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+$font-mono: 'JetBrains Mono', 'IBM Plex Mono', 'Fira Code', monospace;
+
+$max-width: 960px;
+$max-width-wide: 1100px;
+
+$ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+
+// === Reset & Base ===
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background: $bg-primary;
+  color: $text-primary;
+  font-family: $font-body;
+  line-height: 1.7;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+a {
+  color: $text-primary;
+  text-decoration: none;
+  transition: color 0.25s $ease-out;
+
+  &:hover {
+    color: $accent;
+  }
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+::selection {
+  background: $accent-dim;
+  color: $text-primary;
+}
+
+// === Layout ===
+.container {
+  max-width: $max-width;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.container--wide {
+  max-width: $max-width-wide;
+}
+
+main {
+  flex: 1;
+}
+
+// === Header ===
+.site-header {
+  border-bottom: 1px solid $border-color;
+  padding: 1.25rem 0;
+  backdrop-filter: blur(12px);
+  background: rgba($bg-primary, 0.85);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+
+  .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.site-logo {
+  font-family: $font-mono;
+  font-size: 0.875rem;
+  letter-spacing: 0.05em;
+  color: $text-primary;
+  font-weight: 500;
+  transition: opacity 0.25s $ease-out;
+
+  span {
+    color: $accent;
+  }
+
+  &:hover {
+    color: $text-primary;
+    opacity: 0.75;
+  }
+}
+
+.site-nav {
+  display: flex;
+  align-items: center;
+  gap: 1.75rem;
+
+  a {
+    font-family: $font-mono;
+    font-size: 0.8rem;
+    letter-spacing: 0.06em;
+    text-transform: lowercase;
+    color: $text-muted;
+    position: relative;
+    transition: color 0.25s $ease-out;
+
+    &:hover {
+      color: $text-primary;
+    }
+
+    &.active {
+      color: $text-primary;
+
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: -0.45rem;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: $accent;
+      }
+    }
+
+    &.external::after {
+      content: ' ↗';
+      font-size: 0.65rem;
+      opacity: 0.4;
+      position: static;
+      background: none;
+      height: auto;
+    }
+  }
+}
+
+// === Language Switcher ===
+.lang-switcher {
+  display: inline-flex;
+  align-items: center;
+  margin-left: 0.25rem;
+  padding-left: 1.25rem;
+  border-left: 1px solid $border-color;
+  gap: 0.15rem;
+}
+
+.lang-link {
+  font-family: $font-mono;
+  font-size: 0.65rem;
+  letter-spacing: 0.04em;
+  color: $text-muted;
+  padding: 0.2rem 0.35rem;
+  border-radius: $radius-sm;
+  transition: color 0.2s $ease-out, background 0.2s $ease-out;
+
+  &:hover {
+    color: $text-primary;
+    background: rgba(255, 255, 255, 0.05);
+  }
+}
+
+.lang-active {
+  color: $text-primary;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.lang-sep {
+  font-family: $font-mono;
+  font-size: 0.6rem;
+  color: $text-muted;
+  opacity: 0.3;
+}
+
+// === Hero ===
+.hero {
+  padding: 7rem 0 5rem;
+  border-bottom: 1px solid $border-color;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, $accent-glow 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+}
+
+.hero__eyebrow {
+  font-family: $font-mono;
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: $accent;
+  margin-bottom: 1.75rem;
+  position: relative;
+  z-index: 1;
+}
+
+.hero__title {
+  font-family: $font-heading;
+  font-size: clamp(2.75rem, 6.5vw, 4.25rem);
+  font-weight: 400;
+  line-height: 1.12;
+  margin-bottom: 1.75rem;
+  font-style: italic;
+  position: relative;
+  z-index: 1;
+}
+
+.hero__description {
+  font-size: 1.125rem;
+  color: $text-secondary;
+  max-width: 580px;
+  line-height: 1.75;
+  margin-bottom: 0.75rem;
+  position: relative;
+  z-index: 1;
+}
+
+.hero__secondary {
+  font-size: 0.95rem;
+  color: $text-muted;
+  max-width: 520px;
+  position: relative;
+  z-index: 1;
+}
+
+.hero__note {
+  margin-top: 3rem;
+  font-size: 0.8rem;
+  color: $text-muted;
+  font-style: italic;
+  border-left: 2px solid $border-hover;
+  padding-left: 1rem;
+  position: relative;
+  z-index: 1;
+}
+
+// === Sections ===
+.section {
+  padding: 4.5rem 0;
+  border-bottom: 1px solid $border-color;
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.section__header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 2.5rem;
+}
+
+.section__title {
+  font-family: $font-mono;
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: $text-muted;
+}
+
+.section__link {
+  font-family: $font-mono;
+  font-size: 0.72rem;
+  color: $text-muted;
+  transition: color 0.25s $ease-out;
+
+  &:hover {
+    color: $accent;
+  }
+}
+
+// === Focus Areas ===
+.focus-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+.focus-card {
+  background: $bg-secondary;
+  border: 1px solid $border-color;
+  border-radius: $radius-md;
+  padding: 1.75rem;
+  transition: border-color 0.3s $ease-out, transform 0.3s $ease-out, box-shadow 0.3s $ease-out;
+
+  &:hover {
+    border-color: $border-hover;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+  }
+}
+
+.focus-card__icon {
+  font-family: $font-mono;
+  font-size: 0.7rem;
+  color: $accent;
+  margin-bottom: 0.75rem;
+  opacity: 0.7;
+}
+
+.focus-card__title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.focus-card__desc {
+  font-size: 0.85rem;
+  color: $text-secondary;
+  line-height: 1.65;
+}
+
+// === Project Cards ===
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem;
+}
+
+.project-card {
+  border: 1px solid $border-color;
+  border-radius: $radius-md;
+  padding: 1.75rem;
+  transition: border-color 0.3s $ease-out, background 0.3s $ease-out, transform 0.3s $ease-out, box-shadow 0.3s $ease-out;
+  display: flex;
+  flex-direction: column;
+  background: $bg-primary;
+
+  &:hover {
+    border-color: $border-hover;
+    background: $bg-card;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+  }
+}
+
+.project-card__meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.project-card__category {
+  font-family: $font-mono;
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: $text-muted;
+}
+
+.project-card__name {
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.project-card__summary {
+  font-size: 0.875rem;
+  color: $text-secondary;
+  line-height: 1.65;
+  flex: 1;
+}
+
+.project-card__tech {
+  margin-top: 1.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.project-card__links {
+  margin-top: 1.25rem;
+  padding-top: 1rem;
+  border-top: 1px solid $border-color;
+  display: flex;
+  gap: 1.25rem;
+
+  a {
+    font-family: $font-mono;
+    font-size: 0.72rem;
+    color: $text-muted;
+
+    &:hover {
+      color: $accent;
+    }
+  }
+}
+
+// === Status Badge ===
+.badge {
+  font-family: $font-mono;
+  font-size: 0.6rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.55rem;
+  border: 1px solid;
+  border-radius: 100px;
+  display: inline-block;
+}
+
+.badge--active {
+  color: #5fba7d;
+  border-color: #2d4a36;
+  background: rgba(#5fba7d, 0.06);
+}
+
+.badge--research {
+  color: $accent;
+  border-color: rgba($accent, 0.3);
+  background: $accent-glow;
+}
+
+.badge--wip {
+  color: #6b9fc9;
+  border-color: #2d3f4a;
+  background: rgba(#6b9fc9, 0.06);
+}
+
+// === Tag Pill ===
+.tag {
+  font-family: $font-mono;
+  font-size: 0.68rem;
+  color: $text-muted;
+  padding: 0.15rem 0.5rem;
+  border: 1px solid $border-color;
+  border-radius: 100px;
+  transition: border-color 0.2s $ease-out, color 0.2s $ease-out;
+
+  &:hover {
+    border-color: $border-hover;
+    color: $text-secondary;
+  }
+}
+
+.tags-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.tag--lg {
+  padding: 0.4rem 0.8rem;
+  font-size: 0.75rem;
+}
+
+.tag__count {
+  opacity: 0.5;
+}
+
+// === Note List ===
+.notes-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.note-item {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding: 1.25rem 1rem;
+  margin: 0 -1rem;
+  border-radius: $radius-md;
+  transition: background 0.25s $ease-out;
+  gap: 2rem;
+
+  &:hover {
+    background: $bg-secondary;
+  }
+}
+
+.note-item__title {
+  font-size: 1rem;
+  font-weight: 500;
+
+  a {
+    color: $text-primary;
+
+    &:hover {
+      color: $accent;
+    }
+  }
+}
+
+.note-item__date {
+  font-family: $font-mono;
+  font-size: 0.72rem;
+  color: $text-muted;
+  white-space: nowrap;
+}
+
+.note-item__tags {
+  display: flex;
+  gap: 0.4rem;
+  margin-top: 0.3rem;
+}
+
+// === Philosophy Block ===
+.philosophy {
+  padding: 5rem 0;
+  text-align: center;
+  border-bottom: 1px solid $border-color;
+  position: relative;
+}
+
+.philosophy__quote {
+  font-family: $font-heading;
+  font-size: clamp(1.3rem, 3vw, 1.8rem);
+  font-style: italic;
+  font-weight: 400;
+  color: $text-secondary;
+  max-width: 680px;
+  margin: 0 auto;
+  line-height: 1.65;
+}
+
+// === About Page ===
+.about-content {
+  max-width: 680px;
+
+  h2 {
+    font-family: $font-mono;
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: $accent;
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid $border-color;
+  }
+
+  p {
+    color: $text-secondary;
+    margin-bottom: 1rem;
+    line-height: 1.8;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+
+    li {
+      color: $text-secondary;
+      padding: 0.4rem 0;
+      font-size: 0.95rem;
+
+      &::before {
+        content: '—';
+        color: $text-muted;
+        margin-right: 0.75rem;
+      }
+    }
+  }
+}
+
+p.about-intro {
+  font-size: 1.2rem;
+  color: $text-primary;
+  line-height: 1.8;
+  margin-bottom: 2rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid $border-color;
+}
+
+// === Project Detail / Note Detail ===
+.detail-header {
+  padding: 4rem 0 2rem;
+  border-bottom: 1px solid $border-color;
+}
+
+.detail-header__meta {
+  font-family: $font-mono;
+  font-size: 0.72rem;
+  color: $text-muted;
+  letter-spacing: 0.05em;
+  margin-bottom: 1rem;
+}
+
+.detail-header__title {
+  font-family: $font-heading;
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-weight: 400;
+  font-style: italic;
+  line-height: 1.3;
+}
+
+.detail-body {
+  max-width: 680px;
+  padding: 3rem 0 4rem;
+
+  h2 {
+    font-family: $font-heading;
+    font-size: 1.5rem;
+    font-weight: 400;
+    font-style: italic;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+  }
+
+  h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+  }
+
+  p {
+    color: $text-secondary;
+    margin-bottom: 1.25rem;
+    line-height: 1.8;
+  }
+
+  ul, ol {
+    color: $text-secondary;
+    padding-left: 1.5rem;
+    margin-bottom: 1.25rem;
+
+    li {
+      margin-bottom: 0.35rem;
+    }
+  }
+
+  code {
+    font-family: $font-mono;
+    font-size: 0.875em;
+    background: $bg-card;
+    padding: 0.2rem 0.45rem;
+    border-radius: $radius-sm;
+    border: 1px solid $border-color;
+  }
+
+  pre {
+    background: $bg-secondary;
+    border: 1px solid $border-color;
+    padding: 1.25rem;
+    overflow-x: auto;
+    margin-bottom: 1.5rem;
+    border-radius: $radius-md;
+
+    code {
+      background: none;
+      padding: 0;
+      border: none;
+    }
+  }
+
+  blockquote {
+    border-left: 2px solid $accent;
+    padding-left: 1.25rem;
+    margin: 1.5rem 0;
+    font-style: italic;
+    color: $text-muted;
+  }
+
+  .detail-tech {
+    margin-top: 0.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .detail-links {
+    display: flex;
+    gap: 1.25rem;
+    margin-top: 0.5rem;
+
+    a {
+      font-family: $font-mono;
+      font-size: 0.72rem;
+      color: $text-muted;
+
+      &:hover {
+        color: $accent;
+      }
+    }
+  }
+}
+
+// === Footer ===
+.site-footer {
+  border-top: 1px solid $border-color;
+  padding: 2.5rem 0;
+  margin-top: auto;
+}
+
+.footer-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.footer-links {
+  display: flex;
+  gap: 1.5rem;
+
+  a {
+    font-family: $font-mono;
+    font-size: 0.72rem;
+    color: $text-muted;
+    transition: color 0.25s $ease-out;
+
+    &:hover {
+      color: $text-primary;
+    }
+  }
+}
+
+.footer-meta {
+  font-family: $font-mono;
+  font-size: 0.68rem;
+  color: $text-muted;
+}
+
+// === Page Title ===
+.page-title {
+  padding: 4rem 0 2rem;
+  border-bottom: 1px solid $border-color;
+
+  h1 {
+    font-family: $font-heading;
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 400;
+    font-style: italic;
+  }
+
+  p {
+    color: $text-secondary;
+    margin-top: 0.75rem;
+    font-size: 1rem;
+  }
+}
+
+// === 404 ===
+.not-found {
+  text-align: center;
+  padding: 8rem 0;
+
+  h1 {
+    font-family: $font-mono;
+    font-size: 4rem;
+    font-weight: 400;
+    color: $text-muted;
+    margin-bottom: 1rem;
+  }
+
+  p {
+    color: $text-secondary;
+    margin-bottom: 2rem;
+  }
+
+  a {
+    font-family: $font-mono;
+    font-size: 0.85rem;
+    color: $accent;
+    border-bottom: 1px solid rgba($accent, 0.3);
+    padding-bottom: 0.15rem;
+
+    &:hover {
+      border-color: $accent;
+    }
+  }
+}
+
+// === Responsive ===
+@media (max-width: 768px) {
+  .site-nav {
+    gap: 1rem;
+  }
+
+  .hero {
+    padding: 5rem 0 3.5rem;
+  }
+
+  .section {
+    padding: 3rem 0;
+  }
+
+  .focus-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .note-item {
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .footer-content {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .site-header .container {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  .site-nav {
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .lang-switcher {
+    border-left: none;
+    padding-left: 0;
+    margin-left: 0;
+  }
+}

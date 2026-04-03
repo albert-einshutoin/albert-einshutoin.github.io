@@ -1,0 +1,26 @@
+<header class="site-header">
+  <div class="container container--wide">
+    <a href="{% if lang == 'ja' %}{{ config.base_url }}/ja/{% else %}{{ config.base_url }}{% endif %}" class="site-logo">
+      albert<span>.</span>einshutoin<span>.</span>lab
+    </a>
+    <nav class="site-nav">
+      {% set path = current_path | default(value="/") %}
+      <a href="{{ get_url(path='@/projects/_index.md', lang=lang) }}" {% if path is starting_with("/projects") or path is starting_with("/ja/projects") %}class="active"{% endif %}>{{ trans(key="nav_projects", lang=lang) }}</a>
+      <a href="{{ get_url(path='@/notes/_index.md', lang=lang) }}" {% if path is starting_with("/notes") or path is starting_with("/ja/notes") %}class="active"{% endif %}>{{ trans(key="nav_notes", lang=lang) }}</a>
+      <a href="{{ get_url(path='@/about.md', lang=lang) }}" {% if path is starting_with("/about") or path is starting_with("/ja/about") %}class="active"{% endif %}>{{ trans(key="nav_about", lang=lang) }}</a>
+      <a href="{{ config.extra.github }}" class="external" target="_blank" rel="noopener">{{ trans(key="nav_github", lang=lang) }}</a>
+
+      <span class="lang-switcher">
+        {% if lang == "ja" %}
+          <a href="{{ current_url | default(value=config.base_url) | replace(from='/ja/', to='/') }}" class="lang-link">EN</a>
+          <span class="lang-sep">/</span>
+          <span class="lang-link lang-active">JA</span>
+        {% else %}
+          <span class="lang-link lang-active">EN</span>
+          <span class="lang-sep">/</span>
+          <a href="{{ config.base_url }}/ja{{ path }}" class="lang-link">JA</a>
+        {% endif %}
+      </span>
+    </nav>
+  </div>
+</header>

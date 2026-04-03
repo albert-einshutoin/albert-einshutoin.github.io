@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}{{ trans(key="page_notes_title", lang=lang) }} — {{ config.title }}{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="page-title">
+    <h1>{{ trans(key="page_notes_title", lang=lang) }}</h1>
+    <p>{{ trans(key="page_notes_desc", lang=lang) }}</p>
+  </div>
+
+  <section class="section">
+    <div class="notes-list">
+      {% for page in section.pages | sort(attribute="date") | reverse %}
+      {% include "partials/note-item.html" %}
+      {% endfor %}
+    </div>
+  </section>
+</div>
+{% endblock %}

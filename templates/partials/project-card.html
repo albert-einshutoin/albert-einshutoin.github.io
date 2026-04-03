@@ -1,0 +1,29 @@
+<article class="project-card">
+  <div class="project-card__meta">
+    <span class="project-card__category">{{ page.extra.category | default(value="") }}</span>
+    {% if page.extra.status %}
+    <span class="badge badge--{{ page.extra.status | lower }}">{{ page.extra.status }}</span>
+    {% endif %}
+  </div>
+  <h3 class="project-card__name">
+    <a href="{{ page.permalink }}">{{ page.title }}</a>
+  </h3>
+  <p class="project-card__summary">{{ page.description | default(value="") }}</p>
+  {% if page.extra.tech %}
+  <div class="project-card__tech">
+    {% for t in page.extra.tech %}
+    <span class="tag">{{ t }}</span>
+    {% endfor %}
+  </div>
+  {% endif %}
+  {% if page.extra.github or page.extra.npm %}
+  <div class="project-card__links">
+    {% if page.extra.github %}
+    <a href="{{ page.extra.github }}" target="_blank" rel="noopener">github ↗</a>
+    {% endif %}
+    {% if page.extra.npm %}
+    <a href="{{ page.extra.npm }}" target="_blank" rel="noopener">npm ↗</a>
+    {% endif %}
+  </div>
+  {% endif %}
+</article>

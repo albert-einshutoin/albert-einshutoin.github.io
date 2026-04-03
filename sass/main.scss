@@ -552,6 +552,78 @@ main {
   line-height: 1.65;
 }
 
+// === Tech Stack Page ===
+.stack-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.25rem;
+}
+
+.stack-group {
+  background: $bg-secondary;
+  border: 1px solid $border-color;
+  border-radius: $radius-md;
+  padding: 1.5rem;
+  transition: border-color 0.3s $ease-out;
+
+  &:hover {
+    border-color: $border-hover;
+  }
+}
+
+.stack-group__title {
+  font-family: $font-mono;
+  font-size: 0.68rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: $accent;
+  margin-bottom: 1rem;
+}
+
+.stack-group__items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.stack-chip {
+  font-family: $font-mono;
+  font-size: 0.75rem;
+  color: $text-secondary;
+  padding: 0.3rem 0.65rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid $border-color;
+  border-radius: 100px;
+  transition: border-color 0.2s $ease-out, color 0.2s $ease-out;
+
+  &:hover {
+    border-color: $border-hover;
+    color: $text-primary;
+  }
+}
+
+.stack-chip--interest {
+  border-color: rgba($accent, 0.25);
+  color: $accent;
+  background: $accent-glow;
+
+  &:hover {
+    border-color: rgba($accent, 0.5);
+  }
+}
+
+.stack-interested {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.stack-summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
 // === About Page ===
 .about-content {
   max-width: 680px;

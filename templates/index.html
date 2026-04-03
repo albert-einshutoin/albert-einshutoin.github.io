@@ -53,6 +53,31 @@
   </div>
 </section>
 
+{# Tech Stack #}
+<section class="section">
+  <div class="container">
+    <div class="section__header">
+      <h2 class="section__title">{{ trans(key="section_stack", lang=lang) }}</h2>
+      <a href="{{ get_url(path='@/stack.md', lang=lang) }}" class="section__link">{{ trans(key="view_all", lang=lang) }}</a>
+    </div>
+    <div class="stack-summary">
+      <span class="stack-chip">Rust</span>
+      <span class="stack-chip">TypeScript</span>
+      <span class="stack-chip">PHP</span>
+      <span class="stack-chip">Node.js</span>
+      <span class="stack-chip">NestJS</span>
+      <span class="stack-chip">Laravel</span>
+      <span class="stack-chip">AWS</span>
+      <span class="stack-chip">Docker</span>
+      <span class="stack-chip">MySQL</span>
+      <span class="stack-chip">Wasm</span>
+      <span class="stack-chip stack-chip--interest">Zig</span>
+      <span class="stack-chip stack-chip--interest">MoonBit</span>
+      <span class="stack-chip stack-chip--interest">Hono</span>
+    </div>
+  </div>
+</section>
+
 {# Recent Notes #}
 {% set notes_section = get_section(path="notes/_index.md", lang=lang) %}
 <section class="section">

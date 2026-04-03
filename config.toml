@@ -25,6 +25,7 @@ twitter = "https://x.com/ForTe_Grapher"
 [translations]
 nav_projects = "projects"
 nav_notes = "notes"
+nav_stack = "stack"
 nav_about = "about"
 nav_github = "github"
 view_all = "view all →"
@@ -38,6 +39,7 @@ hero_note = "\"Albert\" is a quiet nod to Albert Einstein and first-principles t
 section_focus = "Focus Areas"
 section_projects = "Featured Projects"
 section_notes = "Recent Notes"
+section_stack = "Tech Stack"
 
 focus_1_title = "Low-layer OSS"
 focus_1_desc = "Performance-critical libraries bridging Rust and Node.js for real-world production use."
@@ -63,6 +65,17 @@ page_tag_count = "entries"
 detail_tech = "Tech Stack"
 detail_links = "Links"
 
+page_stack_title = "Tech Stack"
+page_stack_desc = "Languages, frameworks, and tools I work with."
+
+stack_languages = "Languages"
+stack_backend = "Backend"
+stack_infra = "Infrastructure"
+stack_data = "Data"
+stack_systems = "Systems"
+stack_tooling = "Tooling"
+stack_interested = "Interested In"
+
 # --- Japanese ---
 [languages.ja]
 title = "Albert Einshutoin Lab"
@@ -76,6 +89,7 @@ taxonomies = [
 [languages.ja.translations]
 nav_projects = "projects"
 nav_notes = "notes"
+nav_stack = "stack"
 nav_about = "about"
 nav_github = "github"
 view_all = "すべて見る →"
@@ -89,6 +103,7 @@ hero_note = "\"Albert\" は Albert Einstein への静かなリスペクト — �
 section_focus = "注力分野"
 section_projects = "主要プロジェクト"
 section_notes = "最近のノート"
+section_stack = "技術スタック"
 
 focus_1_title = "低レイヤー OSS"
 focus_1_desc = "Rust と Node.js を橋渡しする、プロダクション向けの高性能ライブラリ。"
@@ -113,3 +128,14 @@ page_tag_count = "件"
 
 detail_tech = "技術スタック"
 detail_links = "リンク"
+
+page_stack_title = "Tech Stack"
+page_stack_desc = "使用している言語・フレームワーク・ツール。"
+
+stack_languages = "言語"
+stack_backend = "バックエンド"
+stack_infra = "インフラ"
+stack_data = "データ"
+stack_systems = "システム"
+stack_tooling = "ツール"
+stack_interested = "興味あり"

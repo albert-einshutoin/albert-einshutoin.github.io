@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+
+{% block title %}{{ trans(key="page_stack_title", lang=lang) }} — {{ config.title }}{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="page-title">
+    <h1>{{ trans(key="page_stack_title", lang=lang) }}</h1>
+    <p>{{ trans(key="page_stack_desc", lang=lang) }}</p>
+  </div>
+
+  <section class="section">
+    <div class="stack-grid">
+
+      <div class="stack-group">
+        <h2 class="stack-group__title">{{ trans(key="stack_languages", lang=lang) }}</h2>
+        <div class="stack-group__items">
+          <span class="stack-chip">Rust</span>
+          <span class="stack-chip">TypeScript</span>
+          <span class="stack-chip">JavaScript</span>
+          <span class="stack-chip">PHP</span>
+        </div>
+      </div>
+
+      <div class="stack-group">
+        <h2 class="stack-group__title">{{ trans(key="stack_backend", lang=lang) }}</h2>
+        <div class="stack-group__items">
+          <span class="stack-chip">Node.js</span>
+          <span class="stack-chip">NestJS</span>
+          <span class="stack-chip">Express.js</span>
+          <span class="stack-chip">Laravel</span>
+          <span class="stack-chip">Smarty</span>
+        </div>
+      </div>
+
+      <div class="stack-group">
+        <h2 class="stack-group__title">{{ trans(key="stack_infra", lang=lang) }}</h2>
+        <div class="stack-group__items">
+          <span class="stack-chip">AWS</span>
+          <span class="stack-chip">CloudFront</span>
+          <span class="stack-chip">S3</span>
+          <span class="stack-chip">Cloudflare</span>
+          <span class="stack-chip">Nginx</span>
+          <span class="stack-chip">Docker</span>
+        </div>
+      </div>
+
+      <div class="stack-group">
+        <h2 class="stack-group__title">{{ trans(key="stack_data", lang=lang) }}</h2>
+        <div class="stack-group__items">
+          <span class="stack-chip">MySQL</span>
+          <span class="stack-chip">MongoDB</span>
+          <span class="stack-chip">Prisma</span>
+          <span class="stack-chip">Mongoose</span>
+        </div>
+      </div>
+
+      <div class="stack-group">
+        <h2 class="stack-group__title">{{ trans(key="stack_systems", lang=lang) }}</h2>
+        <div class="stack-group__items">
+          <span class="stack-chip">Wasm</span>
+          <span class="stack-chip">N-API</span>
+          <span class="stack-chip">Image Processing</span>
+          <span class="stack-chip">Edge Security</span>
+        </div>
+      </div>
+
+      <div class="stack-group">
+        <h2 class="stack-group__title">{{ trans(key="stack_tooling", lang=lang) }}</h2>
+        <div class="stack-group__items">
+          <span class="stack-chip">GitHub Actions</span>
+          <span class="stack-chip">GitLab CI/CD</span>
+          <span class="stack-chip">Zola</span>
+          <span class="stack-chip">i18next</span>
+          <span class="stack-chip">OpenAPI</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__header">
+      <h2 class="section__title">{{ trans(key="stack_interested", lang=lang) }}</h2>
+    </div>
+    <div class="stack-interested">
+      <span class="stack-chip stack-chip--interest">Zig</span>
+      <span class="stack-chip stack-chip--interest">MoonBit</span>
+      <span class="stack-chip stack-chip--interest">Hono</span>
+    </div>
+  </section>
+</div>
+{% endblock %}

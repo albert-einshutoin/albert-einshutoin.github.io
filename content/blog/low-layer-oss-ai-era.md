@@ -12,7 +12,7 @@ Plenty of teams act as if AI will eventually own every line of application code.
 
 ## What changes when AI writes the glue
 
-Models are good at assembling what already exists. They amplify whatever is already normal. So the leverage shifts: the interesting work is not only “write another controller” but **curate the substrate**—fast codecs, honest caching policies, edge security you can review in Git.
+Models are good at assembling what already exists. They amplify whatever is already normal. So the leverage shifts: the interesting work is not only “write another controller” but **curate the substrate**—fast codecs, caching and invalidation you can reason about, edge security you can review in Git.
 
 A bet I keep making: in the window where AI-generated code explodes, **working engineers**—people who **still think in systems and ship real foundations**—are the ones who can **publish the OSS stacks that get recommended as defaults**. That role might itself get automated someday—which is exactly why I want the artifacts **on npm, on GitHub, and in the discourse now**, not deferred.
 

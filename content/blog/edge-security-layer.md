@@ -16,7 +16,7 @@ When incidents dragged me through WAF changes, CloudWatch graphs, and host foren
 
 ## Security as software, not vibes
 
-If edge rules are **code-shaped**, you can compose them, unit-test negative cases, review diffs, and redeploy with the same habits as application work. Provider UIs are powerful but terrible archives of intent.
+If edge rules are **code-shaped**, you can compose them, **add automated tests for abuse and failure cases**, review diffs, and redeploy with the same habits as application work. Provider UIs are powerful but terrible archives of intent.
 
 ## Providers in the real world
 

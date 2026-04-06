@@ -1,6 +1,6 @@
 +++
 title = "lazy-image"
-description = "High-performance image processing for Node.js with a Rust-powered core."
+description = "Pure Rust image transforms—compression and modern encoders—with a Node API today and WASM on the roadmap."
 template = "project-page.html"
 weight = 1
 
@@ -14,19 +14,20 @@ github = "https://github.com/albert-einshutoin/lazy-image"
 npm = "https://www.npmjs.com/package/@alberteinshutoin/lazy-image"
 +++
 
-lazy-image is a high-performance image processing library for Node.js, powered by a Rust core via napi-rs.
+I already knew that formats and encoders differ by extension; what pulled me in was **compression efficiency**—if encoders and pipelines are sharp enough, you can cut storage and bytes on the wire in a measurable way. Alongside that, I wanted to lighten image work in TypeScript—WASM first came to mind—but I intentionally began with a **Pure Rust** image package so the core stays honest before the WASM story hardens.
 
-It provides fast, memory-efficient image transformations — resize, format conversion, compression — without spawning child processes or relying on system-level dependencies like ImageMagick.
+lazy-image is **not** a Sharp-style “do everything” convenience layer. It focuses on **compression and up-to-date encoders** implemented in Rust, exposed through an ergonomic Node.js surface today.
 
-## Why
+## Where it is headed
 
-Most image processing in the Node.js ecosystem either depends on native binaries that are painful to install, or runs entirely in JavaScript with significant performance limitations.
+- Move further toward **full WASM** so more logic runs without the usual native-install friction
+- Grow the set of **WASM libraries** that fit the V8 / edge-style runtimes I care about
+- Keep pushing on **services that run on V8**, easing **JavaScript’s single-process** constraints over time
 
-lazy-image bridges this gap: Rust handles the compute-heavy work, while the Node.js API remains ergonomic and familiar.
+## Design principles
 
-## Design Principles
-
-- Zero system dependencies — ships as a prebuilt binary
+- Rust-first core; **WASM is the direction**, not an afterthought
+- Pure Rust encoders where it matters—not a grab-bag of every image feature
 - Stream-friendly API for pipeline integration
-- Predictable memory usage under high concurrency
-- Format-aware: AVIF, WebP, JPEG, PNG with intelligent defaults
+- Predictable memory behavior under concurrency
+- AVIF, WebP, JPEG, PNG with sensible defaults—because format choice *is* a compression story

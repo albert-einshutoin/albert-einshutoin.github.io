@@ -1,6 +1,6 @@
 +++
 title = "cdn-security-framework"
-description = "Policy-driven edge and CDN security logic across multiple providers."
+description = "Edge security as policy and code—born from incidents, evolved from a JS file to YAML to IaC-friendly workflows."
 template = "project-page.html"
 weight = 2
 
@@ -13,19 +13,15 @@ github = "https://github.com/albert-einshutoin/cdn-security-framework"
 npm = "https://www.npmjs.com/package/cdn-security-framework"
 +++
 
-cdn-security-framework provides a unified, policy-driven approach to CDN and edge security across multiple cloud providers.
+During security incidents I was adjusting WAFs, reading CloudWatch, and digging into servers—but I noticed I had **never treated the CDN layer as a first-class security surface**, even though traffic already passed through it (IDS/IPS sit elsewhere in the stack; the CDN still matters upstream).
 
-Rather than scattering security rules across provider-specific configurations, this framework centralizes policies and compiles them to provider-native formats.
+The project started as a **single JavaScript file**, matured into a **YAML-driven compiler**, and kept evolving so policies could ride **IaC** the same way the rest of infrastructure does.
 
-## Why
+Today it targets the providers I actually operate: **AWS CloudFront** and **Cloudflare**.
 
-Edge security is often treated as an afterthought — a collection of ad-hoc rules scattered across CloudFront behaviors, Cloudflare page rules, and WAF configurations. This makes auditing difficult and drift inevitable.
-
-This framework treats edge security as a software layer with clear interfaces, testable policies, and deterministic behavior.
-
-## Core Concepts
+## Core concepts
 
 - Declarative policy definitions
-- Provider adapters (CloudFront, Cloudflare, Fastly)
+- Provider adapters for **CloudFront** and **Cloudflare**
 - Composable rule chains
-- Dry-run and audit modes for safe rollouts
+- Dry-run and audit modes for safer rollouts

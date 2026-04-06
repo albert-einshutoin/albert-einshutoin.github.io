@@ -1,36 +1,25 @@
 +++
 title = "Designing image pipelines beyond default web stacks"
-date = 2026-02-20
-description = "Why most web image processing is harder than it needs to be, and what a better pipeline looks like."
+weight = 20
+description = "lazy-image exists so edge-friendly, Rust-first transforms can push global efficiency—not just shave a few kilobytes locally."
 template = "blog-page.html"
 
 [taxonomies]
 tags = ["image-processing", "architecture", "oss"]
 +++
 
-Image processing on the web has a surprising amount of accidental complexity. The defaults are rarely optimal, the tooling is fragmented, and the performance characteristics are poorly understood by most teams.
+Web image stacks still carry accidental complexity: defaults that are “fine until they aren’t”, vendor sprawl, and latency cliffs when ingestion, transform, and delivery are welded into one hot path.
 
-## The typical setup
+## The thread that started lazy-image
 
-Most web applications handle images in one of two ways:
+My entry point was **compression science**, not hero demos. Formats already diverge; encoders diverge further. If we squeeze better bytes-per-quality inside a predictable core, **storage and bandwidth** fall without asking every user to become an imaging expert. From there the ambition widened: **an image engine that can live near edge compute**, not only deep inside a monolithic app server.
 
-1. Upload to a cloud service (Cloudinary, imgix) and let them handle everything
-2. Process locally using ImageMagick, Sharp, or a similar library
+lazy-image is not trying to be the universal Swiss Army knife. It is a **Pure Rust** bet on **modern encoders and compression** with a path toward **WebAssembly on V8**, because that is where I want throughput without always paying the classic Node native-addon tax.
 
-Option 1 works until costs scale or you need behavior the service does not support. Option 2 works until you need to process images at scale without burning through memory and CPU.
+## Separation still matters
 
-## What a better pipeline looks like
+Keep **ingestion**, **transform**, and **delivery** decoupled. When they collapse into a single request, you inherit latency spikes and hard-to-debug contention—whether or not the transform layer is Rust or WASM.
 
-A well-designed image pipeline separates three concerns:
+## Why this is an OSS story
 
-- **Ingestion**: Validation, metadata extraction, and normalization
-- **Transformation**: Resize, crop, format conversion, compression
-- **Delivery**: Cache strategy, format negotiation, CDN integration
-
-Each of these can be optimized independently. The mistake most teams make is coupling all three into a single request path, which creates latency spikes and resource contention.
-
-## The role of Rust
-
-Rust is particularly well-suited for the transformation layer. Memory safety without garbage collection means predictable performance under concurrent load. And the ecosystem (image-rs, ravif, libwebp bindings) is mature enough for production use.
-
-This is why lazy-image exists: to provide a Node.js-friendly interface to a Rust-powered transformation core, without the installation complexity of native dependencies.
+Personal efficiency is nice; **planet-scale efficiency** is the pointier goal. If the encoder core is open, inspectable, and cheap to adopt, the wins compound outside my own clusters. That is the honest reason the project sits in public—not because every layer is finished, but because **the structure should be shared while it is still possible to steer**.

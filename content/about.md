@@ -5,7 +5,7 @@ path = "about"
 +++
 
 <p class="about-intro">
-Shuto Ide is a backend-oriented systems engineer focused on low-layer OSS, infrastructure design, and experimental tooling.
+Shuto Ide enjoys thinking problems through and then building what that thinking implies. The process itself is satisfying; shipping something real that others can evaluate adds another layer of motivation.
 </p>
 
 ## What I care about
@@ -14,6 +14,7 @@ Shuto Ide is a backend-oriented systems engineer focused on low-layer OSS, infra
 - Performance with clarity
 - OSS that enables others
 - Systems that remain understandable under scale
+- Turning thought into shareable OSS—ideas others can adopt, inspect, and extend
 
 ## Tech areas
 
@@ -28,8 +29,8 @@ Shuto Ide is a backend-oriented systems engineer focused on low-layer OSS, infra
 
 ## Current focus
 
-Building tools and libraries at the intersection of systems programming and web infrastructure. Most of my work lives in the space between "too low-level for most web developers" and "too high-level for systems programmers" — the layer where practical performance meets developer experience.
+A longer arc toward WebAssembly on the V8 runtime: easing the single-process constraints of typical JavaScript runtimes, growing the set of WASM-powered libraries that fit that world, and building services that run well there—starting from Rust-first cores rather than “one tool does everything” stacks.
 
 ## Naming note
 
-The "Albert" in Albert Einshutoin Lab is a small tribute to Albert Einstein and the habit of starting from first principles. Not imitation — respect for deep thinking and the belief that understanding structure is more valuable than memorizing patterns.
+The “Albert” in Albert Einshutoin Lab is **respect for Albert Einstein**—not borrowing authority, but honoring the habit of thinking from structure and first principles.

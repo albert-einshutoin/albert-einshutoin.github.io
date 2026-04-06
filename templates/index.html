@@ -62,7 +62,7 @@
       <a href="{{ get_url(path='@/blog/_index.md', lang=lang) }}" class="section__link">{{ trans(key="view_all", lang=lang) }}</a>
     </div>
     <div class="blog-list">
-      {% for page in blog_section.pages | sort(attribute="date") | reverse %}
+      {% for page in blog_section.pages %}
       {% if loop.index <= 3 %}
       {% include "partials/blog-item.html" %}
       {% endif %}

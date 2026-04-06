@@ -1,41 +1,31 @@
 +++
 title = "Thoughts on edge security as a software layer"
-date = 2026-01-10
-description = "Edge security should be treated as a composable, testable software layer — not a collection of ad-hoc rules."
+weight = 10
+description = "Treat edge rules like software—especially if you have already stared at WAF knobs while the CDN kept serving traffic untouched."
 template = "blog-page.html"
 
 [taxonomies]
 tags = ["edge", "architecture", "security"]
 +++
 
-Edge computing has matured significantly over the past few years. CloudFront Functions, Cloudflare Workers, Deno Deploy, and similar platforms have made it practical to run meaningful logic at the CDN edge.
+Edge platforms are mature enough for real logic—CloudFront Functions, Cloudflare Workers, similar stacks—yet many teams still manage edge security like a pile of console tweaks.
 
-But security at the edge is still, in most organizations, a mess.
+## The failure mode I lived
 
-## The problem
+When incidents dragged me through WAF changes, CloudWatch graphs, and host forensics, **CloudFront still sat in front**, doing what it always did. We had IDS/IPS stories too, but the CDN layer had never been where I *started* thinking about security policy. That blind spot is why I prototyped what became **cdn-security-framework**: first a plain JavaScript file, then YAML-driven compilation, then something IaC could ingest like the rest of infrastructure.
 
-Edge security rules are typically:
+## Security as software, not vibes
 
-- Scattered across provider-specific UIs
-- Defined in formats that resist version control
-- Tested manually, if at all
-- Difficult to audit or reason about as a whole
+If edge rules are **code-shaped**, you can compose them, unit-test negative cases, review diffs, and redeploy with the same habits as application work. Provider UIs are powerful but terrible archives of intent.
 
-This is not a technology problem. The platforms are capable. The problem is that edge security is treated as configuration, not software.
+## Providers in the real world
 
-## Security as a software layer
+In my builds the work centers on **AWS CloudFront** and **Cloudflare**. Abstractions only pay rent if they track the providers you actually operate.
 
-When you treat security rules as software, several things become possible:
+## Trade-offs anyway
 
-- **Composition**: Combine rules from different sources into a coherent policy
-- **Testing**: Validate rules against known-good and known-bad inputs before deployment
-- **Versioning**: Track changes over time with the same rigor as application code
-- **Portability**: Define rules once, compile to multiple providers
+A translation layer costs mental overhead. It wins when policy spans multiple edges, teams, or environments and you need a single source of truth. A single-account, single-vendor setup might stay simpler with native tooling—the point is to choose deliberately.
 
-This is the core idea behind cdn-security-framework: express security intent in a provider-agnostic format, then compile it to whatever the target platform requires.
+## Why keep saying “layer”
 
-## Trade-offs
-
-The main trade-off is complexity. An abstraction layer adds a concept to learn and a tool to maintain. Whether that trade-off is worthwhile depends on scale — if you manage security across multiple CDN providers or multiple teams, the abstraction pays for itself quickly. For a single-provider, single-team setup, the native tools may be sufficient.
-
-The important thing is to recognize the choice as a design decision, not a default.
+Because the edge is already part of your availability surface. Treating it as **software**—not forgotten configuration—is how audits stop feeling like archaeology.

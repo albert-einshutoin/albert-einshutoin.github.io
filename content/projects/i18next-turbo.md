@@ -1,6 +1,6 @@
 +++
 title = "i18next-turbo"
-description = "Tooling and workflows for scalable localization systems."
+description = "i18next workflows with Rust-backed tooling to cut JavaScript overhead at scale."
 template = "project-page.html"
 weight = 3
 
@@ -13,15 +13,9 @@ github = "https://github.com/albert-einshutoin/i18next-turbo"
 npm = "https://www.npmjs.com/package/i18next-turbo"
 +++
 
-i18next-turbo is a set of tools and workflows designed to make large-scale localization manageable, consistent, and fast.
+The motivation is blunt: **large-scale i18n work piles up JavaScript overhead**—parsing, validation, diffing, CI checks—and I wanted to **erase as much of that tax as possible with Rust**, while staying compatible with the i18next stack teams already use.
 
-It builds on top of the i18next ecosystem, adding structure and automation where the default tooling leaves gaps.
-
-## Why
-
-Localization at scale is a coordination problem as much as a technical one. Missing keys, stale translations, inconsistent namespaces, and broken interpolation patterns are common failure modes that slow teams down.
-
-i18next-turbo provides the CLI tooling, validation, and pipeline integration to catch these issues before they reach production.
+It is still a structured toolkit on top of i18next: automation and guardrails where vanilla workflows usually sprawl.
 
 ## Features
 
@@ -30,3 +24,5 @@ i18next-turbo provides the CLI tooling, validation, and pipeline integration to 
 - Missing/unused key detection
 - CI-friendly output formats
 - Translation file diffing and merge conflict resolution
+
+*(Detailed maturity per feature is still being tightened—the shapes above are the targets the CLI is chasing.)*

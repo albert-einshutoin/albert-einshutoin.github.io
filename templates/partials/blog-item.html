@@ -3,6 +3,9 @@
     <div class="blog-item__title">
       <a href="{{ page.permalink }}">{{ page.title }}</a>
     </div>
+    {% if page.description %}
+    <p class="blog-item__desc">{{ page.description }}</p>
+    {% endif %}
     {% if page.taxonomies.tags %}
     <div class="blog-item__tags">
       {% for tag in page.taxonomies.tags %}

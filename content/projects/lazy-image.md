@@ -8,6 +8,7 @@ weight = 1
 category = "Rust / Image Processing"
 status = "Active"
 featured = true
+hero = true
 tech = ["Rust", "Node.js", "napi-rs", "WebAssembly"]
 github = "https://github.com/albert-einshutoin/lazy-image"
 npm = "https://www.npmjs.com/package/@alberteinshutoin/lazy-image"

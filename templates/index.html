@@ -12,22 +12,22 @@
     </div>
     <div class="focus-grid">
       <div class="focus-card">
-        <div class="focus-card__icon">01</div>
+        <div class="focus-card__icon">⚙</div>
         <h3 class="focus-card__title">{{ trans(key="focus_1_title", lang=lang) }}</h3>
         <p class="focus-card__desc">{{ trans(key="focus_1_desc", lang=lang) }}</p>
       </div>
       <div class="focus-card">
-        <div class="focus-card__icon">02</div>
+        <div class="focus-card__icon">◈</div>
         <h3 class="focus-card__title">{{ trans(key="focus_2_title", lang=lang) }}</h3>
         <p class="focus-card__desc">{{ trans(key="focus_2_desc", lang=lang) }}</p>
       </div>
       <div class="focus-card">
-        <div class="focus-card__icon">03</div>
+        <div class="focus-card__icon">△</div>
         <h3 class="focus-card__title">{{ trans(key="focus_3_title", lang=lang) }}</h3>
         <p class="focus-card__desc">{{ trans(key="focus_3_desc", lang=lang) }}</p>
       </div>
       <div class="focus-card">
-        <div class="focus-card__icon">04</div>
+        <div class="focus-card__icon">◎</div>
         <h3 class="focus-card__title">{{ trans(key="focus_4_title", lang=lang) }}</h3>
         <p class="focus-card__desc">{{ trans(key="focus_4_desc", lang=lang) }}</p>
       </div>
@@ -37,7 +37,7 @@
 
 {# Featured Projects #}
 {% set projects_section = get_section(path="projects/_index.md", lang=lang) %}
-<section class="section">
+<section class="section section--alt">
   <div class="container">
     <div class="section__header">
       <h2 class="section__title">{{ trans(key="section_projects", lang=lang) }}</h2>
@@ -46,7 +46,11 @@
     <div class="projects-grid">
       {% for page in projects_section.pages %}
       {% if page.extra.featured | default(value=false) %}
+      {% if loop.first %}
       {% include "partials/project-card.html" %}
+      {% else %}
+      {% include "partials/project-card.html" %}
+      {% endif %}
       {% endif %}
       {% endfor %}
     </div>
@@ -74,6 +78,7 @@
 {# Philosophy #}
 <section class="philosophy">
   <div class="container">
+    <div class="philosophy__mark">"</div>
     <blockquote class="philosophy__quote">
       {{ trans(key="philosophy", lang=lang) }}
     </blockquote>

@@ -52,8 +52,10 @@ focus_4_desc = "Exploring how AI changes the way we architect, test, and maintai
 
 philosophy = "AI commoditizes syntax. Structure, intent, and constraints matter more than ever."
 
-footer_built = "built with zola"
-footer_note_com = "note.com"
+footer_built = "Built with Zola"
+footer_desc = "Low-layer OSS, infrastructure design, and experimental systems."
+footer_nav_site = "Site"
+footer_nav_links = "Links"
 
 page_projects_title = "Projects"
 page_projects_desc = "OSS, research, and experimental tooling."
@@ -122,8 +124,10 @@ focus_4_desc = "AI がアーキテクチャ、テスト、システム保守を�
 
 philosophy = "AI が構文をコモディティ化する。構造、意図、制約はこれまで以上に重要になる。"
 
-footer_built = "built with zola"
-footer_note_com = "note.com"
+footer_built = "Built with Zola"
+footer_desc = "低レイヤー OSS、インフラ設計、実験的システム。"
+footer_nav_site = "サイト"
+footer_nav_links = "リンク"
 
 page_projects_title = "Projects"
 page_projects_desc = "OSS、リサーチ、実験的ツール。"

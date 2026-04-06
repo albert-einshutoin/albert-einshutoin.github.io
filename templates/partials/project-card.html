@@ -1,4 +1,4 @@
-<article class="project-card">
+<article class="project-card {% if page.extra.hero | default(value=false) %}project-card--hero{% endif %}">
   <div class="project-card__meta">
     <span class="project-card__category">{{ page.extra.category | default(value="") }}</span>
     {% if page.extra.status %}

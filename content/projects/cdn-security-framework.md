@@ -1,6 +1,6 @@
 +++
 title = "cdn-security-framework"
-description = "Edge security as policy and code—born from incidents, evolved from a JS file to YAML to IaC-friendly workflows."
+description = "Policy-first CDN edge security—YAML SSOT, compile to CloudFront / Lambda@Edge / Cloudflare Workers, CI lint & drift checks."
 template = "project-page.html"
 weight = 2
 
@@ -8,20 +8,22 @@ weight = 2
 category = "Edge / Security"
 status = "Active"
 featured = true
-tech = ["TypeScript", "CloudFront", "Cloudflare", "AWS Lambda@Edge"]
+tech = ["TypeScript", "JavaScript", "CloudFront", "CloudFront Functions", "Lambda@Edge", "Cloudflare Workers"]
 github = "https://github.com/albert-einshutoin/cdn-security-framework"
 npm = "https://www.npmjs.com/package/cdn-security-framework"
 +++
 
-During security incidents I was adjusting WAFs, reading CloudWatch, and digging into servers—but I noticed I had **never treated the CDN layer as a first-class security surface**, even though traffic already passed through it (IDS/IPS sit elsewhere in the stack; the CDN still matters upstream).
+Matches the [published README](https://github.com/albert-einshutoin/cdn-security-framework): **declarative policy** (`policy/security.yml` etc.) is the **single source of truth**; `npx cdn-security build` validates and emits **edge runtimes** into `dist/edge/` (AWS viewer/origin handlers or Cloudflare Worker output, depending on `--target`). **WAF vs edge** responsibility split is explicit—edge for normalization / light blocking / headers; WAF for OWASP, bots, heavy rate limits.
 
-The project started as a **single JavaScript file**, matured into a **YAML-driven compiler**, and kept evolving so policies could ride **IaC** the same way the rest of infrastructure does.
+Personal origin story on this site still holds: incidents surfaced logs and WAF work first; **CDN as the front line** came into focus afterward, and the tooling grew from one JS file → YAML compiler → **IaC-friendly** outputs.
 
-Today it targets the providers I actually operate: **AWS CloudFront** and **Cloudflare**.
+## Core concepts (aligned with repo)
 
-## Core concepts
+- Human-readable **policy** compiled per provider—not hand-edited runtime copies
+- **AWS**: CloudFront behaviors, CloudFront Functions, Lambda@Edge paths described in the README
+- **Cloudflare**: Workers / security rules alignment
+- **Quality gates**: project scripts and CI cover lint, build, runtime, drift, and security-baseline style checks—use these instead of ad-hoc “audit” copy if you document processes internally
 
-- Declarative policy definitions
-- Provider adapters for **CloudFront** and **Cloudflare**
-- Composable rule chains
-- Dry-run and audit modes for safer rollouts
+## Links
+
+- [github.com/albert-einshutoin/cdn-security-framework](https://github.com/albert-einshutoin/cdn-security-framework) · [npm](https://www.npmjs.com/package/cdn-security-framework)

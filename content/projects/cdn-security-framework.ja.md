@@ -1,6 +1,6 @@
 +++
 title = "cdn-security-framework"
-description = "インシデント対応の経験から生まれたエッジセキュリティ。JS 一枚から YAML、IaC に載せられる形へと育てた。"
+description = "ポリシー駆動の CDN セキュリティ。YAML を SSOT にし、CloudFront / Lambda@Edge / Cloudflare Workers へコンパイル。CI で lint・ビルド・ドリフト検査。"
 template = "project-page.html"
 weight = 2
 
@@ -8,20 +8,21 @@ weight = 2
 category = "Edge / セキュリティ"
 status = "Active"
 featured = true
-tech = ["TypeScript", "CloudFront", "Cloudflare", "AWS Lambda@Edge"]
+tech = ["TypeScript", "JavaScript", "CloudFront", "CloudFront Functions", "Lambda@Edge", "Cloudflare Workers"]
 github = "https://github.com/albert-einshutoin/cdn-security-framework"
 npm = "https://www.npmjs.com/package/cdn-security-framework"
 +++
 
-セキュリティインシデントのときは WAF の調整や CloudWatch、サーバー確認に追われがちでしたが、その手前のレイヤーとして **CDN をセキュリティの主役として意識したことがなかった** と気づきました。IDS/IPS や下流の対策とは別に、そもそもトラフィックは CDN を通っているはずだ、という当たり前を後から拾い上げた感覚です。
+[公開 README](https://github.com/albert-einshutoin/cdn-security-framework) と整合します。**宣言的ポリシー**（`policy/security.yml` など）が **単一の正**で、`npx cdn-security build` で検証したうえで **エッジランタイム**を `dist/edge/` に生成します（`--target cloudflare` で Workers 系、デフォルトで AWS の viewer / origin 用ハンドラ等）。**WAF とエッジの役割分担**も README で明確（正規化・軽いブロック・ヘッダはエッジ、OWASP・Bot・本格的なレート制限は WAF）。
 
-最初は **ただの JavaScript ファイル** でした。**YAML を食うプログラム** にし、さらに **IaC に乗せられる** 形へと変えていきました。
+このサイトで書いた経緯（インシデント対応で WAF 周りに触れ、CDN を前線として再認識し、JS → YAML → IaC へ）も README の設計思想と矛盾しません。
 
-主に触っているのは **CloudFront** と **Cloudflare** です。
+## リポジトリと揃えた要点
 
-## コアコンセプト
+- **ポリシーを読むコンパイラ** — ランタイムを直接いじらない
+- **CloudFront / CloudFront Functions / Lambda@Edge / Cloudflare Workers** を README の対応表どおりに扱う
+- **品質ゲート** — lint・ビルド・ランタイムテスト・ドリフト・セキュリティベースライン等（リポジトリの npm scripts / CI）で再現可能にする
 
-- 宣言的なポリシー定義
-- **CloudFront / Cloudflare** 向けのアダプタ
-- コンポーザブルなルールチェーン
-- 安全なロールアウトのための dry-run / 監査モード
+## リンク
+
+- [github.com/albert-einshutoin/cdn-security-framework](https://github.com/albert-einshutoin/cdn-security-framework) · [npm](https://www.npmjs.com/package/cdn-security-framework)

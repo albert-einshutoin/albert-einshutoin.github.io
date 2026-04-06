@@ -1,24 +1,29 @@
 +++
-title = "QuantCache"
-description = "LRU/LFU の次を探るキャッシュ研究のメモ場所。量子レベルの発想がエッジの現実にどこまで接続できるか試す。"
+title = "quant-cache"
+description = "CDN 向け経済目的関数（$/期間）でキャッシュを評価・最適化。ナップサック選択、トレースリプレイ、qc CLI。"
 template = "project-page.html"
 weight = 4
 
 [extra]
-category = "リサーチ / 最適化"
-status = "Research"
+category = "CDN / 最適化"
+status = "Active"
 featured = true
-tech = ["Rust", "Mathematical Optimization", "Cache Theory"]
-github = "https://github.com/albert-einshutoin/quantcache"
+tech = ["Rust", "CLI", "CDN トレース", "ナップサック / ILP", "シミュレーション"]
+github = "https://github.com/albert-einshutoin/quant-cache"
 +++
 
-Web サービスを非エンジニアが当たり前につくれる世界になると、不足するのは **開発インフラを支える OSS** だと感じ、lazy-image や i18next-turbo、cdn-security-framework を進めてきました。その **さらに先** に行ったときに、古典的ヒューリスティックだけでは足りない局面が出るのではないか—そこで **量子レベルのアルゴリズム** が何をもたらすか、できるところから調べています。
+[quant-cache](https://github.com/albert-einshutoin/quant-cache) は **Rust のワークスペースと `qc` CLI** から成る、**CDN オペレーション向けの経済評価フレームワーク**です。ヒット率だけでなく、レイテンシ価値・オリジン削減・鮮度ペナルティを **$/期間** にまとめた目的関数で比較するため、「ヒット率は高いが経済目的は負」といったパターン（README にある GDSF と SIEVE の対比など）が見えます。
 
-趣味の面もありますが、**自分の発想がどれだけ正しいか**、**世の中のどれくらい先を走れるか** を知りたい、という気持ちも半分です。タイムラインはまだ保留で、問いの輪郭がはっきりしたところから形にします。
+SIEVE や S3-FIFO などのエビクタそのものの**置き換え**ではなく、**判断・評価レイヤー**として位置づけられます。CloudFront ログの取り込み、トレース上のリプレイ、`optimize` / `policy-search`、**Cloudflare / CloudFront** 向けのコンパイル足場などが揃っています。ナップサック系ソルバ（貪欲 / ILP / SA）やパラメータのキャリブレーションも含みます。
 
-## 調べている方向
+lazy-image や i18next-turbo、cdn-security-framework と同じ筋で、**エッジとキャッシュをデプロイ前に数値で押さえる**ための土台です。README のロードマップどおり複数フェーズが進行中で、ここに書いた内容は実リポジトリに追従します。
 
-- オブジェクトサイズ・オリジン遅延・コストを踏まえたエビクション
-- キャッシュ汚染を抑える軽量アドミッション
-- 手動チューニングなしにワークロード変化へ追従する仕組み
-- **CDN エッジのレイテンシ**を前提にした、現実的な実装
+## ざっくりできること
+
+- トレースを取り込み・生成し、LRU / GDSF / SIEVE / S3-FIFO / Belady などを **経済指標つき**で比較する
+- ポリシー探索やプロバイダ向け成果物の生成・検証に繋げる
+- キャッシュ載せの可否を、ROI を意識した言葉で説明する
+
+## リンク
+
+- リポジトリ: [github.com/albert-einshutoin/quant-cache](https://github.com/albert-einshutoin/quant-cache)

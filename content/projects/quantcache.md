@@ -1,24 +1,29 @@
 +++
-title = "QuantCache"
-description = "Sketching cache policies past “classic LRU/LFU”—a playground scratch where quantum-flavored ideas meet real edge budgets."
+title = "quant-cache"
+description = "Economic CDN cache optimization — knapsack-based admission, trace replay, and multi-policy comparison ($/period objective)."
 template = "project-page.html"
 weight = 4
 
 [extra]
-category = "Research / Optimization"
-status = "Research"
+category = "CDN / Optimization"
+status = "Active"
 featured = true
-tech = ["Rust", "Mathematical Optimization", "Cache Theory"]
-github = "https://github.com/albert-einshutoin/quantcache"
+tech = ["Rust", "CLI", "CDN traces", "Knapsack / ILP", "Simulation"]
+github = "https://github.com/albert-einshutoin/quant-cache"
 +++
 
-If non-engineers can ship web services by default, the scarce layer becomes **the infrastructure OSS underneath them**. lazy-image, i18next-turbo, and cdn-security-framework are my answers so far. QuantCache asks what sits **even further out**: when classical heuristics stop being enough, do we need **algorithms with a quantum mindset**—admission/eviction policies that reason about cost, skew, and uncertainty in sharper ways?
+[quant-cache](https://github.com/albert-einshutoin/quant-cache) is a **Rust workspace and `qc` CLI** for CDN operators. It evaluates cache policies with an **economic objective** (latency value, origin savings, stale penalties) in **$/period**—so high hit rate alone is not mistaken for “good” when freshness cost dominates (as in the README’s GDSF vs SIEVE example).
 
-Part hobby, part probe: I want to see **how right the intuition is** and **how far ahead versus the mainstream** this line of thinking can reach. Timelines stay loose while the research surface area stabilizes.
+It does **not** replace modern eviction algorithms such as SIEVE or S3-FIFO. It is a **decision and evaluation layer**: trace import (including CloudFront logs), replay, `optimize` / `policy-search`, and **compile** scaffolds toward **Cloudflare** and **CloudFront**—with bounded knapsack solvers (greedy / ILP / SA) and calibration tooling.
 
-## Directions under exploration
+The same infrastructure-OSS thread as lazy-image, i18next-turbo, and cdn-security-framework applies: **make edge and cache behavior measurable before you ship it**. Roadmap items through Phase E are advanced; this page tracks the live repo, not a sketch.
 
-- Cost-aware eviction that respects object size, origin latency, and real dollars—not just LRU ordering
-- Lightweight admission filters against cache pollution
-- Adaptive behavior when workloads drift without endless manual tuning
-- Implementations honest about **CDN-edge latency** budgets
+## What you can do with it (high level)
+
+- Import or generate request traces, compare LRU / GDSF / SIEVE / S3-FIFO / Belady with **economic metrics**, not just hit rate
+- Search policies and compile toward provider configs with validation hooks
+- Treat cache admission as an optimization problem with measurable ROI language
+
+## Learn more
+
+- Repository: [github.com/albert-einshutoin/quant-cache](https://github.com/albert-einshutoin/quant-cache)

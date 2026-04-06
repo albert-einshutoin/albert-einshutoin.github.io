@@ -1,6 +1,6 @@
 +++
 title = "i18next-turbo"
-description = "i18next 互換を保ちつつ、重い処理は Rust に押し出して JS のオーバーヘッドを減らすツール群。"
+description = "Rust + SWC による i18next 向けキー抽出。高速 CI・watch、optionalDependencies でバイナリ配布。"
 template = "project-page.html"
 weight = 3
 
@@ -8,19 +8,28 @@ weight = 3
 category = "i18n / ツール"
 status = "Active"
 featured = true
-tech = ["TypeScript", "i18next", "CLI", "AST"]
+tech = ["Rust", "SWC", "TypeScript", "i18next", "CLI"]
 github = "https://github.com/albert-einshutoin/i18next-turbo"
 npm = "https://www.npmjs.com/package/i18next-turbo"
 +++
 
-動機はシンプルで、大規模な i18n では **JavaScript 側のオーバーヘッド**（パース、検証、差分、CI 連携など）が積み上がるので、**Rust でそこをできるだけ削る** ことを狙っています。チームがすでに使っている i18next の上に載せる前提です。
+[リポジトリ README](https://github.com/albert-einshutoin/i18next-turbo) のとおり、**i18next-turbo** は **Rust + SWC** ベースの抽出ツールで、i18next 流れのプロジェクト向けに **CI を速く**し、**watch も軽く**することを主眼にしています。`optionalDependencies` で **プラットフォーム別バイナリ**を引く方式（詳細は同 README のインストール章）。
 
-## 機能
+動機（JS の重い処理をRust側へ）は、実装とも一致しています。
 
-- AST 解析によるソースコードからのキー抽出
-- 名前空間の一貫性バリデーション
-- 欠落 / 未使用キーの検出
-- CI フレンドリーな出力形式
-- 翻訳ファイルの差分とマージコンフリクト解決
+## CLI（README 掲載のコマンド）
 
-*（各機能の完成度はまだ詰め直し中で、上記は CLI が目指している形です。）*
+- `init` — 設定の初期化
+- `extract` — キー抽出とロケール同期
+- `watch` — 開発中の継続同期
+- `sync` — キャッシュ / 結果から同期
+- `check` — デッドキーの検出・除去
+- `lint` — ハードコードされたユーザー向け文字列
+- `status` — 翻訳進捗
+- `typegen` — TypeScript のリソース型
+- `rename-key` — キー名の安全なリネーム
+- `migrate-config` — i18next-parser 系設定からの移行
+
+## リンク
+
+- [github.com/albert-einshutoin/i18next-turbo](https://github.com/albert-einshutoin/i18next-turbo) · [npm](https://www.npmjs.com/package/i18next-turbo)

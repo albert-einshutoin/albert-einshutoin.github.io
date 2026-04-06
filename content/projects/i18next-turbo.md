@@ -1,6 +1,6 @@
 +++
 title = "i18next-turbo"
-description = "i18next workflows with Rust-backed tooling to cut JavaScript overhead at scale."
+description = "Rust + SWC key extraction and i18next workflows—fast CI, watch mode, optionalDependencies binaries."
 template = "project-page.html"
 weight = 3
 
@@ -8,21 +8,28 @@ weight = 3
 category = "i18n / Tooling"
 status = "Active"
 featured = true
-tech = ["TypeScript", "i18next", "CLI", "AST"]
+tech = ["Rust", "SWC", "TypeScript", "i18next", "CLI"]
 github = "https://github.com/albert-einshutoin/i18next-turbo"
 npm = "https://www.npmjs.com/package/i18next-turbo"
 +++
 
-The motivation is blunt: **large-scale i18n work piles up JavaScript overhead**—parsing, validation, diffing, CI checks—and I wanted to **erase as much of that tax as possible with Rust**, while staying compatible with the i18next stack teams already use.
+Per the [upstream README](https://github.com/albert-einshutoin/i18next-turbo), **i18next-turbo** is a **Rust + SWC** extractor aligned with i18next-style projects: optimized for **fast CI** and **low-latency watch**. Published builds resolve a **platform binary** via `optionalDependencies` (see their installation docs).
 
-It is still a structured toolkit on top of i18next: automation and guardrails where vanilla workflows usually sprawl.
+Motivation matches the implementation: move parse-heavy work off a slow pure-JS path while keeping i18next conventions.
 
-## Features
+## CLI (as documented upstream)
 
-- Key extraction from source code via AST analysis
-- Namespace consistency validation
-- Missing/unused key detection
-- CI-friendly output formats
-- Translation file diffing and merge conflict resolution
+- `init` — scaffold config
+- `extract` — keys → locale files
+- `watch` — continuous sync in development
+- `sync` — sync from cache / results
+- `check` — dead-key detection / removal
+- `lint` — hardcoded user-facing strings
+- `status` — translation progress
+- `typegen` — TypeScript resource types
+- `rename-key` — safe key renames
+- `migrate-config` — from i18next-parser–style configs
 
-*(Detailed maturity per feature is still being tightened—the shapes above are the targets the CLI is chasing.)*
+## Links
+
+- [github.com/albert-einshutoin/i18next-turbo](https://github.com/albert-einshutoin/i18next-turbo) · [npm](https://www.npmjs.com/package/i18next-turbo)

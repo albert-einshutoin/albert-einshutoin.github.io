@@ -75,6 +75,14 @@
   </script>
 
   <script>
+    document.addEventListener('click', function (e) {
+      document.querySelectorAll('details.lang-dropdown[open]').forEach(function (d) {
+        if (!d.contains(e.target)) d.removeAttribute('open');
+      });
+    });
+  </script>
+
+  <script>
   (function(){
     var c=document.querySelector('.network-bg');
     if(!c)return;

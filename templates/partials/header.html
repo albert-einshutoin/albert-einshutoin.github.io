@@ -3,12 +3,19 @@
     <a href="{% if lang == 'ja' %}{{ config.base_url }}/ja/{% else %}{{ config.base_url }}{% endif %}" class="site-logo">
       albert<span>.</span>einshutoin<span>.</span>lab
     </a>
-    <nav class="site-nav">
+    <button class="menu-toggle" aria-label="Menu" aria-expanded="false" onclick="this.setAttribute('aria-expanded', this.getAttribute('aria-expanded') === 'false' ? 'true' : 'false'); this.nextElementSibling.classList.toggle('is-open')">
+      <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+        <line x1="3" y1="5" x2="17" y2="5"/>
+        <line x1="3" y1="10" x2="17" y2="10"/>
+        <line x1="3" y1="15" x2="17" y2="15"/>
+      </svg>
+    </button>
+    <nav class="site-nav" aria-label="Main navigation">
       {% set path = current_path | default(value="/") %}
-      <a href="{{ get_url(path='@/projects/_index.md', lang=lang) }}" {% if path is starting_with("/projects") or path is starting_with("/ja/projects") %}class="active"{% endif %}>{{ trans(key="nav_projects", lang=lang) }}</a>
-      <a href="{{ get_url(path='@/blog/_index.md', lang=lang) }}" {% if path is starting_with("/blog") or path is starting_with("/ja/blog") %}class="active"{% endif %}>{{ trans(key="nav_blog", lang=lang) }}</a>
-      <a href="{{ get_url(path='@/stack.md', lang=lang) }}" {% if path is starting_with("/stack") or path is starting_with("/ja/stack") %}class="active"{% endif %}>{{ trans(key="nav_stack", lang=lang) }}</a>
-      <a href="{{ get_url(path='@/about.md', lang=lang) }}" {% if path is starting_with("/about") or path is starting_with("/ja/about") %}class="active"{% endif %}>{{ trans(key="nav_about", lang=lang) }}</a>
+      <a href="{{ get_url(path='@/projects/_index.md', lang=lang) }}" {% if path is starting_with("/projects") or path is starting_with("/ja/projects") %}class="active" aria-current="page"{% endif %}>{{ trans(key="nav_projects", lang=lang) }}</a>
+      <a href="{{ get_url(path='@/blog/_index.md', lang=lang) }}" {% if path is starting_with("/blog") or path is starting_with("/ja/blog") %}class="active" aria-current="page"{% endif %}>{{ trans(key="nav_blog", lang=lang) }}</a>
+      <a href="{{ get_url(path='@/stack.md', lang=lang) }}" {% if path is starting_with("/stack") or path is starting_with("/ja/stack") %}class="active" aria-current="page"{% endif %}>{{ trans(key="nav_stack", lang=lang) }}</a>
+      <a href="{{ get_url(path='@/about.md', lang=lang) }}" {% if path is starting_with("/about") or path is starting_with("/ja/about") %}class="active" aria-current="page"{% endif %}>{{ trans(key="nav_about", lang=lang) }}</a>
       <a href="{{ config.extra.github }}" class="external" target="_blank" rel="noopener">{{ trans(key="nav_github", lang=lang) }}</a>
 
       <span class="lang-switcher">

@@ -1,7 +1,7 @@
 +++
 title = "Why low-layer OSS matters in the AI era"
 weight = 30
-description = "If AI ships most code, the OSS that AI cites as “best practice” is shaped by people who used to engineer for real."
+description = "If AI ships most code, the OSS that AI cites as “best practice” is shaped by engineers who still build and curate real foundations."
 template = "blog-page.html"
 
 [taxonomies]
@@ -14,7 +14,7 @@ Plenty of teams act as if AI will eventually own every line of application code.
 
 Models are good at assembling what already exists. They amplify whatever is already normal. So the leverage shifts: the interesting work is not only “write another controller” but **curate the substrate**—fast codecs, honest caching policies, edge security you can review in Git.
 
-A bet I keep making: in the window where AI-generated code explodes, **ex-engineers** (or people who still think like them) are the ones who can **publish the OSS stacks that get recommended as defaults**. That role might itself get automated someday—which is exactly why I want the artifacts **on npm, on GitHub, and in the discourse now**, not deferred.
+A bet I keep making: in the window where AI-generated code explodes, **working engineers**—people who **still think in systems and ship real foundations**—are the ones who can **publish the OSS stacks that get recommended as defaults**. That role might itself get automated someday—which is exactly why I want the artifacts **on npm, on GitHub, and in the discourse now**, not deferred.
 
 ## Why OSS still scales past a solo dev
 

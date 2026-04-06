@@ -5,7 +5,7 @@
 {% include "partials/hero.html" %}
 
 {# Focus Areas #}
-<section class="section">
+<section class="section" data-animate>
   <div class="container">
     <div class="section__header">
       <h2 class="section__title">{{ trans(key="section_focus", lang=lang) }}</h2>
@@ -37,7 +37,7 @@
 
 {# Featured Projects #}
 {% set projects_section = get_section(path="projects/_index.md", lang=lang) %}
-<section class="section section--alt">
+<section class="section section--alt" data-animate>
   <div class="container">
     <div class="section__header">
       <h2 class="section__title">{{ trans(key="section_projects", lang=lang) }}</h2>
@@ -46,11 +46,7 @@
     <div class="projects-grid">
       {% for page in projects_section.pages %}
       {% if page.extra.featured | default(value=false) %}
-      {% if loop.first %}
       {% include "partials/project-card.html" %}
-      {% else %}
-      {% include "partials/project-card.html" %}
-      {% endif %}
       {% endif %}
       {% endfor %}
     </div>
@@ -59,7 +55,7 @@
 
 {# Recent blog posts #}
 {% set blog_section = get_section(path="blog/_index.md", lang=lang) %}
-<section class="section">
+<section class="section" data-animate>
   <div class="container">
     <div class="section__header">
       <h2 class="section__title">{{ trans(key="section_blog", lang=lang) }}</h2>
@@ -76,7 +72,7 @@
 </section>
 
 {# Philosophy #}
-<section class="philosophy">
+<section class="philosophy" data-animate>
   <div class="container">
     <div class="philosophy__mark">"</div>
     <blockquote class="philosophy__quote">

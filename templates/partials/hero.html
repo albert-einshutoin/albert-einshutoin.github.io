@@ -1,7 +1,10 @@
 <section class="hero">
+  <div class="hero__grid" aria-hidden="true"></div>
   <div class="container">
     <div class="hero__eyebrow">{{ trans(key="hero_eyebrow", lang=lang) }}</div>
-    <h1 class="hero__title">{{ trans(key="hero_title", lang=lang) }}</h1>
+    <h1 class="hero__title">
+      <span class="hero__title--typing">{{ trans(key="hero_title", lang=lang) }}</span><span class="hero__cursor" aria-hidden="true"></span>
+    </h1>
     <p class="hero__description">
       {{ trans(key="hero_description", lang=lang) }}
     </p>

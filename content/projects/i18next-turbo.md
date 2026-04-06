@@ -13,7 +13,7 @@ github = "https://github.com/albert-einshutoin/i18next-turbo"
 npm = "https://www.npmjs.com/package/i18next-turbo"
 +++
 
-Per the [upstream README](https://github.com/albert-einshutoin/i18next-turbo), **i18next-turbo** is a **Rust + SWC** extractor aligned with i18next-style projects: optimized for **fast CI** and **low-latency watch**. Published builds resolve a **platform binary** via `optionalDependencies` (see their installation docs).
+Per the [upstream README](https://github.com/albert-einshutoin/i18next-turbo), **i18next-turbo** is a **Rust + SWC** extractor aligned with i18next-style projects: optimised for **fast CI** and **low-latency watch**. Published builds resolve a **platform binary** via `optionalDependencies` (see their installation docs).
 
 Motivation matches the implementation: move parse-heavy work off a slow pure-JS path while keeping i18next conventions.
 

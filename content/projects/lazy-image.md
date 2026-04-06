@@ -16,7 +16,7 @@ npm = "https://www.npmjs.com/package/@alberteinshutoin/lazy-image"
 
 Aligned with the [lazy-image README](https://github.com/albert-einshutoin/lazy-image): a **Rust core** (NAPI-RS) for **web delivery**—**smaller files** in targeted scenarios versus default sharp paths, trading **encode speed** for **bytes on the wire** when bandwidth cost dominates. It is **not** a drop-in sharp replacement; feature breadth and raw throughput differ by design.
 
-**Not** the GitHub “About” blurb about generic lazy-loading—that metadata is stale; the repo documentation describes an **optimization / processing** engine.
+**Not** the GitHub “About” blurb about generic lazy-loading—that metadata is stale; the repo documentation describes an **optimisation / processing** engine.
 
 Personal goals on this site (compression-first encoders, eventual WASM on V8, easing JS runtime limits) sit on top of what already ships: zero-copy **mmap** paths, metadata stripping / firewall posture, fluent `ImageEngine` API, mozjpeg / libwebp / ravif stack for JPEG / WebP / AVIF.
 

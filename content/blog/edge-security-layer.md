@@ -20,7 +20,7 @@ If edge rules are **code-shaped**, you can compose them, **add automated tests f
 
 ## Providers in the real world
 
-In my builds the work centers on **AWS CloudFront** and **Cloudflare**. Abstractions only pay rent if they track the providers you actually operate.
+In my builds the work centres on **AWS CloudFront** and **Cloudflare**. Abstractions only pay rent if they track the providers you actually operate.
 
 ## Trade-offs anyway
 

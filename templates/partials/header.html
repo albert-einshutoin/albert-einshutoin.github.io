@@ -27,15 +27,15 @@
       {% endif %}
       <details class="lang-dropdown">
         <summary class="lang-dropdown__summary" aria-label="{% if lang == 'ja' %}言語を切り替え{% else %}Change language{% endif %}">
-          <span class="lang-dropdown__current-emoji" aria-hidden="true">{% if lang == "ja" %}🇯🇵{% else %}🔤{% endif %}</span>
+          <span class="lang-dropdown__current-emoji" aria-hidden="true">{% if lang == "ja" %}🇯🇵{% else %}🇬🇧{% endif %}</span>
           <span class="lang-dropdown__chevron" aria-hidden="true"></span>
         </summary>
         <div class="lang-dropdown__menu" role="group" aria-label="{% if lang == 'ja' %}表示言語{% else %}Site language{% endif %}">
           {% if lang == "en" %}
-          <span class="lang-dropdown__item lang-dropdown__item--active" title="English" aria-current="true"><span aria-hidden="true">🔤</span></span>
+          <span class="lang-dropdown__item lang-dropdown__item--active" title="British English" aria-current="true"><span aria-hidden="true">🇬🇧</span></span>
           <a href="{{ url_ja }}" class="lang-dropdown__item" title="日本語"><span aria-hidden="true">🇯🇵</span></a>
           {% else %}
-          <a href="{{ url_en }}" class="lang-dropdown__item" title="English"><span aria-hidden="true">🔤</span></a>
+          <a href="{{ url_en }}" class="lang-dropdown__item" title="British English"><span aria-hidden="true">🇬🇧</span></a>
           <span class="lang-dropdown__item lang-dropdown__item--active" title="日本語" aria-current="true"><span aria-hidden="true">🇯🇵</span></span>
           {% endif %}
         </div>

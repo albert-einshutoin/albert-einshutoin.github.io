@@ -14,7 +14,7 @@ Web image stacks still carry accidental complexity: defaults that are “fine un
 
 My entry point was **compression science**, not hero demos. Formats already diverge; encoders diverge further. If we squeeze better bytes-per-quality inside a predictable core, **storage and bandwidth** fall without asking every user to become an imaging expert. From there the ambition widened: **an image engine that can live near edge compute**, not only deep inside a monolithic app server.
 
-lazy-image is not trying to be the universal Swiss Army knife. It is a **Pure Rust** bet on **modern encoders and compression** with a path toward **WebAssembly on V8**, because that is where I want throughput without always paying the classic Node native-addon tax.
+lazy-image is not trying to be the universal Swiss Army knife. It is a **Pure Rust** bet on **modern encoders and compression** with a path towards **WebAssembly on V8**, because that is where I want throughput without always paying the classic Node native-addon tax.
 
 ## Separation still matters
 

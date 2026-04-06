@@ -40,6 +40,8 @@
   {% block head_extra %}{% endblock %}
 </head>
 <body>
+  <canvas class="network-bg" aria-hidden="true"></canvas>
+
   <svg style="position:absolute;width:0;height:0" aria-hidden="true">
     <filter id="grain-filter">
       <feTurbulence type="fractalNoise" baseFrequency="0.75" numOctaves="4" stitchTiles="stitch"/>
@@ -70,6 +72,138 @@
       },{threshold:0.1,rootMargin:'0px 0px -40px 0px'});
       els.forEach(function(el){obs.observe(el)});
     });
+  </script>
+
+  <script>
+  (function(){
+    var c=document.querySelector('.network-bg');
+    if(!c)return;
+    var ctx=c.getContext('2d');
+    if(!ctx)return;
+    var reducedMotion=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+    var W,H,dpr=Math.min(window.devicePixelRatio||1,2);
+    var scrollY=0,targetScroll=0;
+    var NODE_COUNT=55,EDGE_DIST=180,PERSPECTIVE=600;
+    var nodes=[],edges=[];
+
+    function resize(){
+      W=window.innerWidth;H=window.innerHeight;
+      c.width=W*dpr;c.height=H*dpr;
+      c.style.width=W+'px';c.style.height=H+'px';
+      ctx.setTransform(dpr,0,0,dpr,0,0);
+    }
+
+    function initNodes(){
+      nodes=[];edges=[];
+      var spread=Math.max(W,H)*0.7;
+      for(var i=0;i<NODE_COUNT;i++){
+        nodes.push({
+          x:(Math.random()-0.5)*spread,
+          y:(Math.random()-0.5)*spread,
+          z:(Math.random()-0.5)*spread*0.6,
+          vx:(Math.random()-0.5)*0.15,
+          vy:(Math.random()-0.5)*0.15,
+          vz:(Math.random()-0.5)*0.08,
+          r:Math.random()*1.5+0.8
+        });
+      }
+      buildEdges();
+    }
+
+    function buildEdges(){
+      edges=[];
+      for(var i=0;i<nodes.length;i++){
+        for(var j=i+1;j<nodes.length;j++){
+          var dx=nodes[i].x-nodes[j].x,dy=nodes[i].y-nodes[j].y,dz=nodes[i].z-nodes[j].z;
+          var d=Math.sqrt(dx*dx+dy*dy+dz*dz);
+          if(d<EDGE_DIST)edges.push([i,j,d]);
+        }
+      }
+    }
+
+    function getThemeColors(){
+      var s=getComputedStyle(document.documentElement);
+      return{
+        accent:s.getPropertyValue('--accent').trim()||'#4a9eff',
+        muted:s.getPropertyValue('--text-muted').trim()||'#5a5d6e',
+        bg:s.getPropertyValue('--bg-primary').trim()||'#06060f'
+      };
+    }
+
+    function project(x,y,z,rotX,rotY){
+      var cosA=Math.cos(rotY),sinA=Math.sin(rotY);
+      var x1=x*cosA-z*sinA,z1=x*sinA+z*cosA;
+      var cosB=Math.cos(rotX),sinB=Math.sin(rotX);
+      var y1=y*cosB-z1*sinB,z2=y*sinB+z1*cosB;
+      var scale=PERSPECTIVE/(PERSPECTIVE+z2);
+      return{px:x1*scale+W/2,py:y1*scale+H/2,s:scale,z:z2};
+    }
+
+    var frameId,lastTime=0;
+    function draw(time){
+      frameId=requestAnimationFrame(draw);
+      if(!lastTime)lastTime=time;
+      var dt=Math.min((time-lastTime)/16.67,3);
+      lastTime=time;
+
+      scrollY+=(targetScroll-scrollY)*0.08;
+
+      var cols=getThemeColors();
+      ctx.clearRect(0,0,W,H);
+
+      var rotY=scrollY*0.0003+time*0.00004;
+      var rotX=scrollY*0.00015+Math.sin(time*0.00003)*0.15;
+
+      if(!reducedMotion){
+        for(var i=0;i<nodes.length;i++){
+          var n=nodes[i];
+          n.x+=n.vx*dt;n.y+=n.vy*dt;n.z+=n.vz*dt;
+          var bound=Math.max(W,H)*0.4;
+          if(Math.abs(n.x)>bound)n.vx*=-1;
+          if(Math.abs(n.y)>bound)n.vy*=-1;
+          if(Math.abs(n.z)>bound*0.5)n.vz*=-1;
+        }
+        if(Math.random()<0.02)buildEdges();
+      }
+
+      var projected=[];
+      for(var i=0;i<nodes.length;i++){
+        projected.push(project(nodes[i].x,nodes[i].y,nodes[i].z,rotX,rotY));
+      }
+
+      for(var i=0;i<edges.length;i++){
+        var e=edges[i],a=projected[e[0]],b=projected[e[1]];
+        var avgZ=(a.z+b.z)/2;
+        var alpha=Math.max(0,Math.min(0.18,(1-e[2]/EDGE_DIST)*0.2*(PERSPECTIVE/(PERSPECTIVE+avgZ))));
+        ctx.beginPath();
+        ctx.moveTo(a.px,a.py);
+        ctx.lineTo(b.px,b.py);
+        ctx.strokeStyle=cols.accent;
+        ctx.globalAlpha=alpha;
+        ctx.lineWidth=0.6;
+        ctx.stroke();
+      }
+
+      for(var i=0;i<projected.length;i++){
+        var p=projected[i],n=nodes[i];
+        var alpha=Math.max(0.08,Math.min(0.55,p.s*0.5));
+        ctx.beginPath();
+        ctx.arc(p.px,p.py,n.r*p.s,0,Math.PI*2);
+        ctx.fillStyle=cols.accent;
+        ctx.globalAlpha=alpha;
+        ctx.fill();
+      }
+      ctx.globalAlpha=1;
+    }
+
+    function onScroll(){targetScroll=window.pageYOffset||document.documentElement.scrollTop}
+
+    resize();initNodes();
+    window.addEventListener('resize',function(){resize();initNodes()});
+    window.addEventListener('scroll',onScroll,{passive:true});
+    onScroll();
+    frameId=requestAnimationFrame(draw);
+  })();
   </script>
 </body>
 </html>

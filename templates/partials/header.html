@@ -20,27 +20,19 @@
 
       {% if lang == "ja" %}
         {% set url_en = current_url | default(value=config.base_url) | replace(from='/ja/', to='/') %}
-        {% set url_ja = current_url | default(value=config.base_url ~ '/ja/') %}
       {% else %}
-        {% set url_en = current_url | default(value=config.base_url ~ path) %}
         {% set url_ja = config.base_url ~ '/ja' ~ path %}
       {% endif %}
       <div class="site-nav__tools">
-      <details class="lang-dropdown">
-        <summary class="lang-dropdown__summary" aria-label="{% if lang == 'ja' %}言語を切り替え{% else %}Change language{% endif %}">
-          <span class="lang-dropdown__current-emoji" aria-hidden="true">{% if lang == "ja" %}🇯🇵{% else %}🇬🇧{% endif %}</span>
-          <span class="lang-dropdown__chevron" aria-hidden="true"></span>
-        </summary>
-        <div class="lang-dropdown__menu" role="group" aria-label="{% if lang == 'ja' %}表示言語{% else %}Site language{% endif %}">
-          {% if lang == "en" %}
-          <span class="lang-dropdown__item lang-dropdown__item--active" title="British English" aria-current="true"><span aria-hidden="true">🇬🇧</span></span>
-          <a href="{{ url_ja }}" class="lang-dropdown__item" title="日本語"><span aria-hidden="true">🇯🇵</span></a>
-          {% else %}
-          <a href="{{ url_en }}" class="lang-dropdown__item" title="British English"><span aria-hidden="true">🇬🇧</span></a>
-          <span class="lang-dropdown__item lang-dropdown__item--active" title="日本語" aria-current="true"><span aria-hidden="true">🇯🇵</span></span>
-          {% endif %}
-        </div>
-      </details>
+      <div class="lang-switch" role="group" aria-label="{% if lang == 'ja' %}表示言語{% else %}Site language{% endif %}">
+        {% if lang == "en" %}
+        <span class="lang-switch__item lang-switch__item--active" aria-current="true">EN</span>
+        <a href="{{ url_ja }}" class="lang-switch__item">JA</a>
+        {% else %}
+        <a href="{{ url_en }}" class="lang-switch__item">EN</a>
+        <span class="lang-switch__item lang-switch__item--active" aria-current="true">JA</span>
+        {% endif %}
+      </div>
 
       <button class="theme-toggle" aria-label="Toggle theme" onclick="var h=document.documentElement,t=h.getAttribute('data-theme')==='light'?'dark':'light';h.setAttribute('data-theme',t);localStorage.setItem('theme',t)">
         <svg class="icon-sun" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round">

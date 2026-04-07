@@ -25,8 +25,25 @@
       document.documentElement.setAttribute('data-ui-mode', (m==='folio'||m==='lab') ? m : 'lab');
       var t=localStorage.getItem('theme');
       if(t){document.documentElement.setAttribute('data-theme',t)}else if(window.matchMedia&&window.matchMedia('(prefers-color-scheme:light)').matches){document.documentElement.setAttribute('data-theme','light')}
+      if(document.documentElement.getAttribute('data-ui-mode')==='folio'&&window.matchMedia&&!window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+        document.documentElement.classList.add('folio-typewriter-pending');
+      }
     })();
   </script>
+  <style>
+    /* FOUC防止: タイプライター対象は JS が走るまで非表示（main.css より先に効かせる） */
+    html.folio-typewriter-pending[data-ui-mode="folio"] .hero__eyebrow,
+    html.folio-typewriter-pending[data-ui-mode="folio"] .hero .hero__title-line,
+    html.folio-typewriter-pending[data-ui-mode="folio"] .hero__description,
+    html.folio-typewriter-pending[data-ui-mode="folio"] .hero__secondary,
+    html.folio-typewriter-pending[data-ui-mode="folio"] .detail-header > *,
+    html.folio-typewriter-pending[data-ui-mode="folio"] .page-title > *,
+    html.folio-typewriter-pending[data-ui-mode="folio"] .detail-body > *,
+    html.folio-typewriter-pending[data-ui-mode="folio"] .about-content > *,
+    html.folio-typewriter-pending[data-ui-mode="folio"] .philosophy__quote {
+      opacity: 0 !important;
+    }
+  </style>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -101,6 +118,9 @@
       btn.addEventListener('click',function(){
         var m=btn.getAttribute('data-ui-mode-set');
         if(m!=='lab'&&m!=='folio')return;
+        if(m==='folio'&&window.matchMedia&&!window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+          document.documentElement.classList.add('folio-typewriter-pending');
+        }
         document.documentElement.setAttribute('data-ui-mode',m);
         try{localStorage.setItem('ui-mode',m)}catch(e){}
         document.querySelectorAll('[data-ui-mode-set]').forEach(function(b){

@@ -1,6 +1,6 @@
 /**
  * Folio UI mode: typewriter-style text output + list reveals.
- * Header is not modified by this script. Skips when prefers-reduced-motion or Lab mode.
+ * Header is not modified. Uses html.folio-typewriter-pending (base.html) to avoid FOUC.
  */
 (function () {
   var timers = [];
@@ -49,6 +49,7 @@
       if (b && el.parentNode) {
         el.innerHTML = b.html;
       }
+      el.style.opacity = '';
       el.classList.remove('folio-typing');
       el.querySelectorAll('.folio-type-caret').forEach(function (c) {
         c.remove();
@@ -67,6 +68,69 @@
     });
   }
 
+  /** Backup all targets, clear short text, keep long/pre hidden until typed or skipped */
+  function primeTypingTargets() {
+    var items = [];
+
+    var hero = document.querySelector('.hero');
+    if (hero) {
+      ['.hero__eyebrow', '.hero__title-line--1', '.hero__title-line--2', '.hero__description', '.hero__secondary'].forEach(function (sel) {
+        var el = hero.querySelector(sel);
+        if (el) items.push({ el: el, kind: 'text' });
+      });
+    }
+
+    document.querySelectorAll('.detail-header').forEach(function (dh) {
+      [].forEach.call(dh.children, function (child) {
+        items.push({ el: child, kind: 'text' });
+      });
+    });
+
+    document.querySelectorAll('.page-title').forEach(function (pt) {
+      [].forEach.call(pt.children, function (child) {
+        items.push({ el: child, kind: 'text' });
+      });
+    });
+
+    document.querySelectorAll('.detail-body').forEach(function (body) {
+      [].forEach.call(body.children, function (child) {
+        items.push({ el: child, kind: 'rich' });
+      });
+    });
+
+    document.querySelectorAll('.about-content').forEach(function (ac) {
+      [].forEach.call(ac.children, function (child) {
+        items.push({ el: child, kind: 'rich' });
+      });
+    });
+
+    var quote = document.querySelector('.philosophy__quote');
+    if (quote) items.push({ el: quote, kind: 'text' });
+
+    items.forEach(function (item) {
+      remember(item.el);
+    });
+
+    items.forEach(function (item) {
+      var el = item.el;
+      var b = backup.get(el);
+      var t = b ? b.text : '';
+      if (item.kind === 'rich') {
+        if (el.tagName === 'PRE' || el.classList.contains('highlight')) {
+          el.style.opacity = '0';
+          return;
+        }
+        if (t.length > 1400) {
+          el.style.opacity = '0';
+          return;
+        }
+      }
+      el.textContent = '';
+    });
+
+    document.documentElement.classList.remove('folio-typewriter-pending');
+  }
+
   function typeTextElement(el, speedMs, done) {
     var b = remember(el);
     if (!b || !b.text.length) {
@@ -83,6 +147,7 @@
     function step() {
       if (!isFolio()) {
         el.innerHTML = b.html;
+        el.style.opacity = '';
         caret.remove();
         el.classList.remove('folio-typing');
         done();
@@ -90,6 +155,7 @@
       }
       if (i > b.text.length) {
         el.innerHTML = b.html;
+        el.style.opacity = '';
         caret.remove();
         el.classList.remove('folio-typing');
         done();
@@ -110,10 +176,12 @@
       return;
     }
     if (el.tagName === 'PRE' || el.classList.contains('highlight')) {
+      el.style.opacity = '';
       done();
       return;
     }
     if (b.text.length > 1400) {
+      el.style.opacity = '';
       done();
       return;
     }
@@ -127,6 +195,7 @@
     function step() {
       if (!isFolio()) {
         el.innerHTML = b.html;
+        el.style.opacity = '';
         caret.remove();
         el.classList.remove('folio-typing');
         done();
@@ -134,6 +203,7 @@
       }
       if (i > b.text.length) {
         el.innerHTML = b.html;
+        el.style.opacity = '';
         caret.remove();
         el.classList.remove('folio-typing');
         done();
@@ -167,17 +237,18 @@
   }
 
   function revealLists() {
-    document
-      .querySelectorAll('.folio-list-reveal:not(.folio-list-reveal--visible)')
-      .forEach(function (el, idx) {
-        schedule(function () {
-          el.classList.add('folio-list-reveal--visible');
-        }, 40 + idx * 55);
-      });
+    document.querySelectorAll('.folio-list-reveal:not(.folio-list-reveal--visible)').forEach(function (el, idx) {
+      schedule(function () {
+        el.classList.add('folio-list-reveal--visible');
+      }, 40 + idx * 55);
+    });
   }
 
   window.initFolioMotion = function () {
     clearTimers();
+    if (!isFolio() || reducedMotion()) {
+      document.documentElement.classList.remove('folio-typewriter-pending');
+    }
     restoreAll();
     backup = new WeakMap();
 
@@ -185,18 +256,17 @@
       return;
     }
 
+    document.documentElement.classList.add('folio-typewriter-pending');
     document.body.classList.add('folio-motion-on');
     prepHiddenLists();
+    primeTypingTargets();
 
     var tasks = [];
 
     var hero = document.querySelector('.hero');
     if (hero) {
       hero.classList.add('folio-hero-motion');
-      var heroOrder = hero.querySelectorAll(
-        '.hero__eyebrow, .hero__title-line--1, .hero__title-line--2, .hero__description, .hero__secondary'
-      );
-      [].forEach.call(heroOrder, function (el) {
+      hero.querySelectorAll('.hero__eyebrow, .hero__title-line--1, .hero__title-line--2, .hero__description, .hero__secondary').forEach(function (el) {
         tasks.push(function (done) {
           typeTextElement(el, el.classList.contains('hero__description') ? 14 : 22, done);
         });

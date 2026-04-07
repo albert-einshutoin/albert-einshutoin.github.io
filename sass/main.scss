@@ -419,6 +419,41 @@ main { flex: 1; }
   }
 }
 
+// === UI mode switch (Lab / Folio) ===
+.ui-mode-switch {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  overflow: hidden;
+  flex: 0 0 auto;
+}
+
+.ui-mode-switch__item {
+  font-family: $font-mono;
+  font-size: 0.58rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  padding: 0.3rem 0.48rem;
+  color: var(--text-muted);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: color 0.2s $ease-smooth, background 0.2s $ease-smooth;
+  line-height: 1;
+
+  &:hover:not(.ui-mode-switch__item--active) {
+    color: var(--text-primary);
+    background: var(--accent-glow);
+  }
+
+  &--active {
+    color: var(--accent);
+    background: var(--accent-dim);
+    cursor: default;
+  }
+}
+
 // === Hero ===
 .hero {
   padding: 10rem 0 7rem;
@@ -1251,4 +1286,362 @@ p.about-intro {
   }
   .footer-nav { flex-direction: column; gap: 1.5rem; }
   .philosophy { padding: 5rem 0; }
+}
+
+// =============================================================================
+// UI mode: Folio — warm editorial / printed matter (same content, different skin)
+// =============================================================================
+
+html[data-ui-mode="folio"] .network-bg {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+html[data-ui-mode="folio"] .grain {
+  opacity: 0.045;
+  filter: none;
+  background: radial-gradient(ellipse at 40% 0%, rgba(139, 90, 43, 0.07) 0%, transparent 50%);
+}
+
+html[data-ui-mode="folio"][data-theme="light"] {
+  --bg-primary: #f2ebe3;
+  --bg-secondary: #e8dfd4;
+  --bg-card: #faf6f0;
+  --bg-elevated: #fffdf9;
+  --bg-primary-alpha: rgba(242, 235, 227, 0.94);
+  --bg-secondary-alpha: rgba(232, 223, 212, 0.92);
+  --bg-card-alpha: rgba(250, 246, 240, 0.96);
+  --text-primary: #1c1814;
+  --text-secondary: #4a4239;
+  --text-muted: #7a7167;
+  --accent: #8b3d3d;
+  --accent-dim: rgba(139, 61, 61, 0.1);
+  --accent-glow: rgba(139, 61, 61, 0.05);
+  --border: #d4c9bc;
+  --border-hover: #b5a896;
+  --grain-opacity: 0.035;
+  --grid-opacity: 0.05;
+  --badge-green: #2d6a4f;
+  --badge-green-bg: rgba(45, 106, 79, 0.08);
+  --badge-green-border: rgba(45, 106, 79, 0.25);
+  --badge-amber: #b45309;
+  --badge-amber-bg: rgba(180, 83, 9, 0.08);
+  --badge-amber-border: rgba(180, 83, 9, 0.22);
+  --badge-blue: #1d4ed8;
+  --badge-blue-bg: rgba(29, 78, 216, 0.06);
+  --badge-blue-border: rgba(29, 78, 216, 0.2);
+  color-scheme: light;
+}
+
+html[data-ui-mode="folio"][data-theme="dark"] {
+  --bg-primary: #131210;
+  --bg-secondary: #1a1815;
+  --bg-card: #201e1a;
+  --bg-elevated: #2a2621;
+  --bg-primary-alpha: rgba(19, 18, 16, 0.95);
+  --bg-secondary-alpha: rgba(26, 24, 21, 0.93);
+  --bg-card-alpha: rgba(32, 30, 26, 0.92);
+  --text-primary: #ece7de;
+  --text-secondary: #a69e92;
+  --text-muted: #7d756b;
+  --accent: #c4a574;
+  --accent-dim: rgba(196, 165, 116, 0.12);
+  --accent-glow: rgba(196, 165, 116, 0.06);
+  --border: #3a352e;
+  --border-hover: #4f4840;
+  --grain-opacity: 0.04;
+  --grid-opacity: 0.07;
+  --badge-green: #6ee7a8;
+  --badge-green-bg: rgba(110, 231, 168, 0.06);
+  --badge-green-border: rgba(110, 231, 168, 0.2);
+  --badge-amber: #fbbf24;
+  --badge-amber-bg: rgba(251, 191, 36, 0.06);
+  --badge-amber-border: rgba(251, 191, 36, 0.2);
+  --badge-blue: #93c5fd;
+  --badge-blue-bg: rgba(147, 197, 253, 0.06);
+  --badge-blue-border: rgba(147, 197, 253, 0.2);
+  color-scheme: dark;
+}
+
+html[data-ui-mode="folio"] body {
+  font-family: 'Newsreader', 'Noto Serif JP', Georgia, 'Times New Roman', serif;
+  letter-spacing: 0.012em;
+}
+
+html[data-ui-mode="folio"] .skip-link {
+  font-family: $font-mono;
+}
+
+html[data-ui-mode="folio"] .site-logo {
+  font-family: 'Newsreader', 'Noto Serif JP', Georgia, serif;
+  font-style: italic;
+  font-weight: 500;
+  font-size: 0.9rem;
+  letter-spacing: 0.04em;
+}
+
+html[data-ui-mode="folio"] .site-nav > a:not(.external) {
+  font-family: 'Newsreader', 'Noto Serif JP', Georgia, serif;
+  font-size: 0.84rem;
+  text-transform: none;
+  letter-spacing: 0.04em;
+  font-weight: 500;
+}
+
+html[data-ui-mode="folio"] .site-nav__tools .lang-switch__item,
+html[data-ui-mode="folio"] .ui-mode-switch__item {
+  font-family: 'Newsreader', 'Noto Serif JP', Georgia, serif;
+  font-size: 0.58rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-style: normal;
+  font-weight: 600;
+}
+
+html[data-ui-mode="folio"] .site-header {
+  border-bottom: 3px double var(--border);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+html[data-ui-mode="folio"] .hero__grid {
+  opacity: 0.055;
+  background-image: linear-gradient(90deg, var(--border) 1px, transparent 1px),
+    linear-gradient(var(--border) 1px, transparent 1px);
+  background-size: 44px 44px;
+  animation: none;
+}
+
+html[data-ui-mode="folio"] .hero__eyebrow {
+  font-family: 'Newsreader', 'Noto Serif JP', Georgia, serif;
+  letter-spacing: 0.32em;
+
+  &::before {
+    width: 28px;
+  }
+}
+
+html[data-ui-mode="folio"] .hero__title {
+  font-family: 'Newsreader', 'Noto Serif JP', Georgia, serif;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+
+html[data-ui-mode="folio"] .hero__description {
+  font-family: 'Newsreader', 'Noto Serif JP', Georgia, serif;
+  font-size: 1.02rem;
+  font-style: italic;
+  font-weight: 400;
+}
+
+html[data-ui-mode="folio"] .hero__secondary {
+  font-family: 'Newsreader', 'Noto Serif JP', Georgia, serif;
+  font-style: italic;
+  font-size: 0.86rem;
+}
+
+html[data-ui-mode="folio"] .section__title {
+  font-family: 'Newsreader', 'Noto Serif JP', Georgia, serif;
+  letter-spacing: 0.22em;
+  font-size: 0.64rem;
+}
+
+html[data-ui-mode="folio"] .section__link {
+  font-family: 'Newsreader', 'Noto Serif JP', Georgia, serif;
+  letter-spacing: 0.1em;
+  font-size: 0.68rem;
+}
+
+html[data-ui-mode="folio"] .focus-card__title {
+  font-family: 'Newsreader', 'Noto Serif JP', Georgia, serif;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+}
+
+html[data-ui-mode="folio"] .project-card__category,
+html[data-ui-mode="folio"] .blog-item__date,
+html[data-ui-mode="folio"] .detail-header__meta {
+  font-family: $font-mono;
+  letter-spacing: 0.08em;
+}
+
+html[data-ui-mode="folio"] .project-card__name,
+html[data-ui-mode="folio"] .blog-item__title {
+  font-family: 'Newsreader', 'Noto Serif JP', Georgia, serif;
+  font-weight: 600;
+}
+
+html[data-ui-mode="folio"] .philosophy__mark {
+  font-family: 'Newsreader', Georgia, serif;
+  opacity: 0.22;
+}
+
+html[data-ui-mode="folio"] .philosophy__quote {
+  font-family: 'Newsreader', 'Noto Serif JP', Georgia, serif;
+}
+
+html[data-ui-mode="folio"] .stack-group__title {
+  font-family: 'Newsreader', 'Noto Serif JP', Georgia, serif;
+  letter-spacing: 0.18em;
+}
+
+html[data-ui-mode="folio"] .about-content h2 {
+  font-family: 'Newsreader', 'Noto Serif JP', Georgia, serif;
+  letter-spacing: 0.2em;
+}
+
+html[data-ui-mode="folio"] p.about-intro {
+  font-family: 'Newsreader', 'Noto Serif JP', Georgia, serif;
+}
+
+html[data-ui-mode="folio"] .detail-header__title,
+html[data-ui-mode="folio"] .page-title h1 {
+  font-family: 'Newsreader', 'Noto Serif JP', Georgia, serif;
+  font-weight: 600;
+}
+
+html[data-ui-mode="folio"] .detail-body h2,
+html[data-ui-mode="folio"] .detail-body h3 {
+  font-family: 'Newsreader', 'Noto Serif JP', Georgia, serif;
+  font-weight: 600;
+}
+
+html[data-ui-mode="folio"] .detail-body code,
+html[data-ui-mode="folio"] .detail-body pre,
+html[data-ui-mode="folio"] .detail-body pre code {
+  font-family: $font-mono;
+  font-style: normal;
+}
+
+html[data-ui-mode="folio"] .detail-links a {
+  font-family: $font-mono;
+}
+
+html[data-ui-mode="folio"] .footer-brand__logo {
+  font-family: 'Newsreader', 'Noto Serif JP', Georgia, serif;
+  font-style: italic;
+}
+
+html[data-ui-mode="folio"] .footer-nav__label {
+  font-family: 'Newsreader', 'Noto Serif JP', Georgia, serif;
+  letter-spacing: 0.18em;
+}
+
+html[data-ui-mode="folio"] .footer-nav__group a {
+  font-family: 'Newsreader', 'Noto Serif JP', Georgia, serif;
+}
+
+html[data-ui-mode="folio"] .footer-meta {
+  font-family: $font-mono;
+}
+
+html[data-ui-mode="folio"] .focus-grid,
+html[data-ui-mode="folio"] .projects-grid,
+html[data-ui-mode="folio"] .blog-list,
+html[data-ui-mode="folio"] .stack-grid {
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.04),
+    0 12px 32px rgba(0, 0, 0, 0.05);
+}
+
+html[data-ui-mode="folio"][data-theme="dark"] .focus-grid,
+html[data-ui-mode="folio"][data-theme="dark"] .projects-grid,
+html[data-ui-mode="folio"][data-theme="dark"] .blog-list,
+html[data-ui-mode="folio"][data-theme="dark"] .stack-grid {
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.04),
+    0 16px 40px rgba(0, 0, 0, 0.35);
+}
+
+html[data-ui-mode="folio"] .tag,
+html[data-ui-mode="folio"] .badge {
+  font-family: $font-mono;
+}
+
+html[data-ui-mode="folio"] .not-found h1,
+html[data-ui-mode="folio"] .not-found a {
+  font-family: 'Newsreader', 'Noto Serif JP', Georgia, serif;
+}
+
+html[data-ui-mode="folio"] .not-found h1 {
+  font-weight: 300;
+}
+
+// --- Folio motion: ink reveal + stagger (see static/js/folio-motion.js) ---
+@keyframes folioInkReveal {
+  0% {
+    opacity: 0;
+    transform: translateY(0.35em);
+    filter: blur(5px);
+    clip-path: inset(0 100% 0 0);
+  }
+  55% {
+    filter: blur(1px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@keyframes folioCaretBlink {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+html[data-ui-mode="folio"] body.folio-motion-on .folio-write-block {
+  opacity: 0;
+  animation: folioInkReveal 1.05s $ease-out forwards;
+  animation-delay: var(--folio-delay, 0s);
+  animation-fill-mode: forwards;
+  will-change: opacity, transform, filter, clip-path;
+}
+
+html[data-ui-mode="folio"] body.folio-motion-on .detail-body pre.folio-write-block {
+  animation-duration: 0.75s;
+}
+
+html[data-ui-mode="folio"] .hero.folio-hero-motion .hero__title-line--1,
+html[data-ui-mode="folio"] .hero.folio-hero-motion .hero__title-line--2 {
+  animation: none !important;
+}
+
+html[data-ui-mode="folio"] body.folio-motion-on .hero.folio-hero-motion .hero__description {
+  position: relative;
+}
+
+html[data-ui-mode="folio"] body.folio-motion-on .hero.folio-hero-motion .hero__description::after {
+  content: '';
+  display: inline-block;
+  width: 1.5px;
+  height: 0.95em;
+  margin-left: 0.12em;
+  vertical-align: -0.08em;
+  background: var(--accent);
+  opacity: 0;
+  animation: folioCaretBlink 0.9s step-end infinite;
+  animation-delay: 1.45s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html[data-ui-mode="folio"] body.folio-motion-on .folio-write-block {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+    clip-path: none !important;
+  }
+
+  html[data-ui-mode="folio"] body.folio-motion-on .hero.folio-hero-motion .hero__description::after {
+    display: none !important;
+  }
 }

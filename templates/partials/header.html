@@ -24,6 +24,11 @@
         {% set url_ja = config.base_url ~ '/ja' ~ path %}
       {% endif %}
       <div class="site-nav__tools">
+      <div class="ui-mode-switch" role="group" aria-label="{{ trans(key='aria_ui_mode', lang=lang) }}">
+        <button type="button" class="ui-mode-switch__item" data-ui-mode-set="lab" aria-pressed="false">{{ trans(key="ui_mode_lab", lang=lang) }}</button>
+        <button type="button" class="ui-mode-switch__item" data-ui-mode-set="folio" aria-pressed="false">{{ trans(key="ui_mode_folio", lang=lang) }}</button>
+      </div>
+
       <div class="lang-switch" role="group" aria-label="{% if lang == 'ja' %}表示言語{% else %}Site language{% endif %}">
         {% if lang == "en" %}
         <span class="lang-switch__item lang-switch__item--active" aria-current="true">EN</span>

@@ -85,6 +85,10 @@ stack_streaming = "Streaming"
 stack_tooling = "Tooling"
 stack_interested = "Interested In"
 
+aria_ui_mode = "Interface mode"
+ui_mode_lab = "Lab"
+ui_mode_folio = "Folio"
+
 # --- Japanese ---
 [languages.ja]
 title = "Albert Einshutoin Lab"
@@ -157,3 +161,7 @@ stack_ai = "AI / ワークフロー"
 stack_streaming = "ストリーミング"
 stack_tooling = "ツール"
 stack_interested = "興味あり"
+
+aria_ui_mode = "表示モード"
+ui_mode_lab = "Lab"
+ui_mode_folio = "冊子"

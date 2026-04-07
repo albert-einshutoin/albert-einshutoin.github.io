@@ -24,7 +24,13 @@
       var m=localStorage.getItem('ui-mode');
       document.documentElement.setAttribute('data-ui-mode', (m==='folio'||m==='lab') ? m : 'lab');
       var t=localStorage.getItem('theme');
-      if(t){document.documentElement.setAttribute('data-theme',t)}else if(window.matchMedia&&window.matchMedia('(prefers-color-scheme:light)').matches){document.documentElement.setAttribute('data-theme','light')}
+      if(t==='light'||t==='dark'){
+        document.documentElement.setAttribute('data-theme',t);
+      } else if(window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches){
+        document.documentElement.setAttribute('data-theme','light');
+      } else {
+        document.documentElement.setAttribute('data-theme','dark');
+      }
       if(document.documentElement.getAttribute('data-ui-mode')==='folio'&&window.matchMedia&&!window.matchMedia('(prefers-reduced-motion: reduce)').matches){
         document.documentElement.classList.add('folio-typewriter-pending');
       }

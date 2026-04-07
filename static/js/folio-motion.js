@@ -6,6 +6,7 @@
   var timers = [];
   var backup = new WeakMap();
   var folioTargets = [];
+  var listRevealObserver = null;
 
   function clearTimers() {
     timers.forEach(function (id) {
@@ -62,6 +63,10 @@
     document.querySelectorAll('.folio-list-reveal').forEach(function (el) {
       el.classList.remove('folio-list-reveal', 'folio-list-reveal--visible');
     });
+    if (listRevealObserver) {
+      listRevealObserver.disconnect();
+      listRevealObserver = null;
+    }
     document.body.classList.remove('folio-motion-on');
     document.querySelectorAll('.hero').forEach(function (h) {
       h.classList.remove('folio-hero-motion');
@@ -220,7 +225,6 @@
   function chain(tasks, i) {
     if (!isFolio()) return;
     if (i >= tasks.length) {
-      revealLists();
       return;
     }
     tasks[i](function () {
@@ -236,11 +240,60 @@
       });
   }
 
-  function revealLists() {
-    document.querySelectorAll('.folio-list-reveal:not(.folio-list-reveal--visible)').forEach(function (el, idx) {
-      schedule(function () {
-        el.classList.add('folio-list-reveal--visible');
-      }, 40 + idx * 55);
+  /** Stagger within the same parent (e.g. focus grid) when multiple cards enter together */
+  function staggerDelayFor(el) {
+    var parent = el.parentElement;
+    if (!parent) return 0;
+    var peers = parent.querySelectorAll(
+      ':scope > .focus-card, :scope > .blog-item, :scope > .project-card, :scope > .stack-group, :scope > .stack-interested'
+    );
+    var idx = 0;
+    for (var i = 0; i < peers.length; i++) {
+      if (peers[i] === el) {
+        idx = i;
+        break;
+      }
+    }
+    return Math.min(idx * 48, 360);
+  }
+
+  function bindFolioListReveal() {
+    if (listRevealObserver) {
+      listRevealObserver.disconnect();
+      listRevealObserver = null;
+    }
+
+    var candidates = document.querySelectorAll(
+      '.focus-card, .blog-item, .project-card, .stack-group, .stack-interested'
+    );
+    if (!candidates.length) return;
+
+    listRevealObserver = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting || !isFolio()) return;
+          var el = entry.target;
+          if (!el.classList.contains('folio-list-reveal')) return;
+          var delay = staggerDelayFor(el);
+          schedule(function () {
+            if (isFolio() && el.isConnected) {
+              el.classList.add('folio-list-reveal--visible');
+            }
+          }, delay);
+          listRevealObserver.unobserve(el);
+        });
+      },
+      {
+        threshold: 0.06,
+        rootMargin: '0px 0px -4% 0px',
+      }
+    );
+
+    candidates.forEach(function (el) {
+      if (!el.classList.contains('folio-list-reveal')) {
+        el.classList.add('folio-list-reveal');
+      }
+      listRevealObserver.observe(el);
     });
   }
 
@@ -260,6 +313,7 @@
     document.body.classList.add('folio-motion-on');
     prepHiddenLists();
     primeTypingTargets();
+    bindFolioListReveal();
 
     var tasks = [];
 
@@ -316,7 +370,6 @@
     }
 
     if (tasks.length === 0) {
-      revealLists();
       return;
     }
 

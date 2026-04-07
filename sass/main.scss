@@ -2033,10 +2033,8 @@ html[data-ui-mode="folio"] body.folio-motion-on .detail-body pre.folio-write-blo
   animation-duration: 0.75s;
 }
 
-html[data-ui-mode="folio"] .hero.folio-hero-motion .hero__title-line--1,
-html[data-ui-mode="folio"] .hero.folio-hero-motion .hero__title-line--2 {
-  animation: none !important;
-}
+// Hero title lines: do NOT use animation:none here — it would override folioInkReveal
+// (same elements have .folio-write-block). Higher-specificity folio rule wins over .hero__title-line--n.
 
 html[data-ui-mode="folio"] body.folio-motion-on .hero.folio-hero-motion .hero__description {
   position: relative;

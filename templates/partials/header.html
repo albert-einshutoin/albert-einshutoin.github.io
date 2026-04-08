@@ -1,4 +1,6 @@
 <header class="site-header">
+  {# Folio のみ表示（Lab では CSS で非表示） #}
+  <div class="folio-nameplate" aria-hidden="true"></div>
   <div class="container container--wide">
     <a href="{% if lang == 'ja' %}{{ config.base_url }}/ja/{% else %}{{ config.base_url }}{% endif %}" class="site-logo">
       albert<span>.</span>einshutoin<span>.</span>lab

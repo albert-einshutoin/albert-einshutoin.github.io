@@ -1298,13 +1298,17 @@ html[data-ui-mode="folio"] .network-bg {
   pointer-events: none;
 }
 
-html[data-ui-mode="folio"] .grain {
-  opacity: 0.045;
+html[data-ui-mode='folio'] .grain {
+  opacity: 0.028;
   filter: none;
-  background: radial-gradient(ellipse at 40% 0%, rgba(139, 90, 43, 0.07) 0%, transparent 50%);
+  background: radial-gradient(ellipse at 40% 0%, rgba(139, 90, 43, 0.06) 0%, transparent 50%);
 }
 
 html[data-ui-mode="folio"][data-theme="light"] {
+  /* 机（デスク）と紙面の分離 */
+  --folio-desk: #d4cfc5;
+  --folio-paper: #f4f1eb;
+  --folio-paper-edge: #c9c2b6;
   /* 新聞紙寄り: やや冷たいグレーの地、インクはほぼ黒 */
   --bg-primary: #e8e4de;
   --bg-secondary: #ddd8cf;
@@ -1336,6 +1340,9 @@ html[data-ui-mode="folio"][data-theme="light"] {
 }
 
 html[data-ui-mode="folio"][data-theme="dark"] {
+  --folio-desk: #0a0a08;
+  --folio-paper: #161512;
+  --folio-paper-edge: #2a2620;
   /* 夜の新聞: わずかに青みのある墨・紙 */
   --bg-primary: #10100e;
   --bg-secondary: #181714;
@@ -1366,45 +1373,130 @@ html[data-ui-mode="folio"][data-theme="dark"] {
   color-scheme: dark;
 }
 
-html[data-ui-mode="folio"] body {
+html[data-ui-mode='folio'] body {
   font-family: 'Newsreader', 'Noto Serif JP', Georgia, 'Times New Roman', serif;
   letter-spacing: 0.012em;
+  position: relative;
+  background: transparent;
 }
 
-html[data-ui-mode="folio"] .skip-link {
+html[data-ui-mode='folio'] .skip-link {
   font-family: $font-mono;
 }
 
-// --- Folio: 新聞風（マストヘッド・ナビ・段組） ---
-html[data-ui-mode="folio"] .site-header {
-  border-bottom: 3px double var(--text-primary);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+// --- Folio: broadsheet（一面の新聞・Lab とは別世界観） ---
+html[data-ui-mode='folio'] {
+  background: var(--folio-desk, var(--bg-secondary));
 }
 
-html[data-ui-mode="folio"] .site-logo {
+/* 紙面: main を一枚の新聞に */
+html[data-ui-mode='folio'] main {
+  position: relative;
+  z-index: 1;
+  max-width: 72rem;
+  margin-left: auto;
+  margin-right: auto;
+  background: var(--folio-paper, var(--bg-card));
+  border-left: 1px solid var(--folio-paper-edge, var(--border));
+  border-right: 1px solid var(--folio-paper-edge, var(--border));
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.04),
+    0 32px 80px rgba(0, 0, 0, 0.1);
+}
+
+html[data-ui-mode='folio'][data-theme='dark'] main {
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.06),
+    0 28px 70px rgba(0, 0, 0, 0.55);
+}
+
+html[data-ui-mode='folio'] main > .hero:first-child,
+html[data-ui-mode='folio'] main > .container:first-child {
+  border-top: 5px double var(--text-primary);
+}
+
+/* Lab では非表示の名札帯 */
+.folio-nameplate {
+  display: none;
+}
+
+html[data-ui-mode='folio'] .folio-nameplate {
+  display: block;
+  width: 100%;
+  height: 5px;
+  border-bottom: 1px solid var(--text-primary);
+  background: linear-gradient(180deg, var(--accent-dim) 0%, transparent 85%);
+}
+
+// --- Folio: 新聞風（マストヘッド・ナビ・段組） ---
+html[data-ui-mode='folio'] .site-header {
+  border-bottom: 3px double var(--text-primary);
+  background: var(--folio-paper, var(--bg-card));
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.07);
+}
+
+html[data-ui-mode='folio'][data-theme='dark'] .site-header {
+  box-shadow: 0 10px 36px rgba(0, 0, 0, 0.5);
+}
+
+html[data-ui-mode='folio'] .site-header .container--wide {
+  max-width: 72rem;
+}
+
+html[data-ui-mode='folio'] .site-logo {
   font-family: 'Newsreader', 'Noto Serif JP', Georgia, serif;
   font-style: italic;
-  font-size: 0.88rem;
-  letter-spacing: 0.04em;
-  font-weight: 600;
+  font-size: clamp(0.82rem, 2vw, 0.95rem);
+  letter-spacing: 0.06em;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-variant: small-caps;
 }
 
-html[data-ui-mode="folio"] .site-nav > a {
+html[data-ui-mode='folio'] .site-nav > a {
   font-family: 'Newsreader', 'Noto Serif JP', Georgia, serif;
-  font-size: 0.65rem;
-  font-weight: 500;
-  letter-spacing: 0.16em;
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
   font-variant-numeric: tabular-nums;
 }
 
-// --- Folio shell ---
-html[data-ui-mode="folio"] body {
-  position: relative;
+html[data-ui-mode='folio'] .ui-mode-switch,
+html[data-ui-mode='folio'] .lang-switch {
+  border-radius: 0;
+  border-width: 2px;
+  border-color: var(--text-primary);
+  background: var(--folio-paper, var(--bg-card));
 }
 
-html[data-ui-mode="folio"] .hero {
+html[data-ui-mode='folio'] .theme-toggle {
+  border-radius: 0;
+  border-width: 2px;
+  border-color: var(--text-primary);
+  background: var(--folio-paper, var(--bg-card));
+}
+
+html[data-ui-mode='folio'] .menu-toggle {
+  border-radius: 0;
+  border-width: 2px;
+  border-color: var(--text-primary);
+  background: var(--folio-paper, var(--bg-card));
+}
+
+html[data-ui-mode='folio'] .site-nav {
+  &.is-open {
+    border-top: 2px solid var(--text-primary);
+  }
+}
+
+html[data-ui-mode='folio'] .site-nav__tools {
+  border-left: 2px solid var(--border);
+}
+
+html[data-ui-mode='folio'] .hero {
   min-height: min(88vh, 880px);
   display: flex;
   align-items: center;
@@ -1421,7 +1513,7 @@ html[data-ui-mode="folio"] .hero .container {
   grid-template-rows: auto auto;
   gap: 1.5rem 2.75rem;
   align-items: start;
-  max-width: 70rem;
+  max-width: 72rem;
   margin: 0 auto;
   padding: 2.25rem 1.75rem 2.5rem;
   border-top: 4px solid var(--text-primary);
@@ -1532,10 +1624,15 @@ html[data-ui-mode="folio"] .section {
   padding: 3.5rem 0;
 }
 
-html[data-ui-mode="folio"] .section--alt {
+html[data-ui-mode='folio'] .section--alt {
   background: var(--bg-secondary-alpha);
-  border-top: 1px solid var(--border);
+  border-top: 2px solid var(--text-primary);
   border-bottom: 1px solid var(--border);
+  box-shadow: inset 0 1px 0 0 rgba(0, 0, 0, 0.04);
+}
+
+html[data-ui-mode='folio'][data-theme='dark'] .section--alt {
+  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.04);
 }
 
 html[data-ui-mode="folio"] .section > .container {
@@ -1713,19 +1810,23 @@ html[lang='ja'][data-ui-mode='folio'] .section:has(> .stack-interested) .stack-i
   }
 }
 
-html[data-ui-mode="folio"] .focus-grid {
+html[data-ui-mode='folio'] .focus-grid {
   counter-reset: folio-focus;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr;
   gap: 0;
   background: transparent;
-  border: none;
+  border: 2px solid var(--text-primary);
   border-radius: 0;
-  border-top: 2px solid var(--text-primary);
-  border-bottom: 2px solid var(--text-primary);
 }
 
-html[data-ui-mode="folio"] .focus-card {
+@media (min-width: 768px) {
+  html[data-ui-mode='folio'] .focus-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+html[data-ui-mode='folio'] .focus-card {
   counter-increment: folio-focus;
   display: grid;
   grid-template-columns: 2.6rem 1fr;
@@ -1733,12 +1834,24 @@ html[data-ui-mode="folio"] .focus-card {
   column-gap: 1.1rem;
   row-gap: 0.35rem;
   align-items: start;
-  padding: 1.6rem 0;
+  padding: 1.5rem 1rem 1.6rem;
   margin: 0;
   border-radius: 0;
   border-bottom: 1px solid var(--border);
   background: transparent !important;
   box-shadow: none !important;
+
+  @media (min-width: 768px) {
+    border-right: 1px solid var(--border);
+
+    &:nth-child(2n) {
+      border-right: none;
+    }
+
+    &:nth-child(n + 3) {
+      border-bottom: none;
+    }
+  }
 
   &:last-child {
     border-bottom: none;
@@ -1789,10 +1902,32 @@ html[data-ui-mode="folio"] .detail-header__meta {
   letter-spacing: 0.08em;
 }
 
-html[data-ui-mode="folio"] .project-card__name,
-html[data-ui-mode="folio"] .blog-item__title {
+html[data-ui-mode='folio'] .project-card__name {
   font-family: 'Newsreader', 'Noto Serif JP', Georgia, serif;
-  font-weight: 600;
+  font-weight: 700;
+  font-size: 1.05rem;
+  line-height: 1.35;
+  letter-spacing: -0.02em;
+}
+
+html[data-ui-mode='folio'] .blog-item__title {
+  flex: 1;
+  min-width: 0;
+  font-family: 'Newsreader', 'Noto Serif JP', Georgia, serif;
+  font-weight: 700;
+  font-size: 1.05rem;
+  line-height: 1.35;
+  letter-spacing: -0.02em;
+}
+
+html[data-ui-mode='folio'] .blog-item__title a {
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.15s $ease-smooth;
+
+  &:hover {
+    border-bottom-color: var(--accent);
+  }
 }
 
 html[data-ui-mode="folio"] .philosophy {
@@ -1809,13 +1944,16 @@ html[data-ui-mode="folio"] .philosophy {
   }
 }
 
-html[data-ui-mode="folio"] .philosophy .container {
+html[data-ui-mode='folio'] .philosophy .container {
   max-width: 48rem;
   margin: 0 auto;
   display: grid;
   grid-template-columns: 4rem 1fr;
   gap: 0 1.5rem;
   align-items: start;
+  border: 2px solid var(--text-primary);
+  padding: 2rem 1.75rem;
+  background: var(--folio-paper, var(--bg-card));
 }
 
 @media (max-width: 768px) {
@@ -1873,13 +2011,13 @@ html[data-ui-mode="folio"] p.about-intro {
   font-family: 'Newsreader', 'Noto Serif JP', Georgia, serif;
 }
 
-html[data-ui-mode="folio"] .detail-header {
-  padding: 3.5rem 0 2.5rem;
-  border-bottom: none;
-  max-width: 52rem;
-  margin: 0 auto;
-  padding-left: 1.5rem;
-  border-left: 3px solid var(--accent);
+html[data-ui-mode='folio'] .detail-header {
+  padding: 2.75rem 1.5rem 2.25rem;
+  border-bottom: 2px solid var(--border);
+  border-left: none;
+  max-width: none;
+  margin: 0 -1.5rem;
+  background: linear-gradient(180deg, var(--bg-secondary-alpha) 0%, transparent 72%);
 }
 
 html[data-ui-mode="folio"] .detail-header__meta {
@@ -1889,26 +2027,40 @@ html[data-ui-mode="folio"] .detail-header__meta {
   margin-bottom: 1.5rem;
 }
 
-html[data-ui-mode="folio"] .detail-header__title,
-html[data-ui-mode="folio"] .page-title h1 {
+html[data-ui-mode='folio'] .detail-header__title,
+html[data-ui-mode='folio'] .page-title h1 {
   font-family: 'Newsreader', 'Noto Serif JP', Georgia, serif;
   font-weight: 600;
   max-width: none;
 }
 
-html[data-ui-mode="folio"] .page-title {
-  padding: 3.5rem 0 2rem;
-  border-bottom: none;
-  max-width: 52rem;
-  margin: 0 auto;
-  padding-left: 1.5rem;
-  border-left: 3px solid var(--accent);
+html[data-ui-mode='folio'] .detail-header__title {
+  font-size: clamp(1.85rem, 4.2vw, 2.9rem);
+  line-height: 1.12;
+  letter-spacing: -0.025em;
 }
 
-html[data-ui-mode="folio"] .page-title p {
-  max-width: 42rem;
-  margin-top: 1.25rem;
+html[data-ui-mode='folio'] .page-title {
+  padding: 2.75rem 1.5rem 2.25rem;
+  border-bottom: 2px solid var(--border);
+  border-left: none;
+  max-width: none;
+  margin: 0 -1.5rem;
+  background: linear-gradient(180deg, var(--bg-secondary-alpha) 0%, transparent 72%);
+}
+
+html[data-ui-mode='folio'] .page-title h1 {
+  font-size: clamp(1.75rem, 4vw, 2.75rem);
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+html[data-ui-mode='folio'] .page-title p {
+  max-width: 40rem;
+  margin-top: 1rem;
   font-style: italic;
+  font-size: 0.98rem;
+  color: var(--text-secondary);
 }
 
 html[data-ui-mode="folio"] .detail-body {
@@ -1996,15 +2148,28 @@ html[data-ui-mode="folio"] .detail-links a {
   font-family: $font-mono;
 }
 
-html[data-ui-mode="folio"] .site-footer {
-  margin-top: 3rem;
-  padding: 2.75rem 0 2.25rem;
-  border-top: 3px double var(--text-primary);
-  background: var(--bg-primary);
+html[data-ui-mode='folio'] .site-footer {
+  margin-top: 0;
+  padding: 3rem 0 2.5rem;
+  border-top: 4px double var(--text-primary);
+  background: var(--folio-desk, var(--bg-secondary));
 }
 
-html[data-ui-mode="folio"] .footer-inner {
+html[data-ui-mode='folio'] .site-footer .container--wide {
+  max-width: 72rem;
+}
+
+html[data-ui-mode='folio'] .footer-inner {
   gap: 2rem;
+}
+
+html[data-ui-mode='folio'] .footer-brand__desc {
+  font-family: 'Newsreader', 'Noto Serif JP', Georgia, serif;
+  font-size: 0.82rem;
+  line-height: 1.65;
+  color: var(--text-secondary);
+  margin-top: 0.65rem;
+  max-width: 28rem;
 }
 
 html[data-ui-mode="folio"] .footer-top {
@@ -2056,17 +2221,34 @@ html[data-ui-mode="folio"] .footer-meta {
   letter-spacing: 0.04em;
 }
 
-html[data-ui-mode="folio"] .projects-grid,
-html[data-ui-mode="folio"] .blog-list {
+html[data-ui-mode='folio'] .projects-grid,
+html[data-ui-mode='folio'] .blog-list {
   display: flex;
   flex-direction: column;
   gap: 0;
   background: transparent;
-  border: none;
+  border: 2px solid var(--text-primary);
   border-radius: 0;
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
   box-shadow: none !important;
+}
+
+@media (min-width: 960px) {
+  html[data-ui-mode='folio'] .projects-grid,
+  html[data-ui-mode='folio'] .blog-list {
+    display: block;
+    column-count: 2;
+    column-gap: 0;
+    column-rule: 2px solid var(--text-primary);
+    border: 2px solid var(--text-primary);
+  }
+
+  html[data-ui-mode='folio'] .project-card,
+  html[data-ui-mode='folio'] .blog-item {
+    break-inside: avoid;
+    page-break-inside: avoid;
+    padding-left: 1.1rem;
+    padding-right: 1.1rem;
+  }
 }
 
 html[data-ui-mode="folio"] .project-card {
@@ -2122,26 +2304,31 @@ html[data-ui-mode="folio"] .blog-item__date {
   opacity: 0.85;
 }
 
-html[data-ui-mode="folio"] .blog-item__title {
-  flex: 1;
-  min-width: 0;
-}
-
-html[data-ui-mode="folio"] .stack-grid {
+html[data-ui-mode='folio'] .stack-grid {
   display: grid;
   grid-template-columns: 1fr;
   gap: 0;
   background: transparent;
-  border: none;
+  border: 2px solid var(--text-primary);
   border-radius: 0;
-  border-top: 2px solid var(--text-primary);
   box-shadow: none !important;
 }
 
-html[data-ui-mode="folio"] .stack-group {
+@media (min-width: 768px) {
+  html[data-ui-mode='folio'] .stack-grid {
+    grid-template-columns: 1fr 1fr;
+    column-gap: 0;
+  }
+
+  html[data-ui-mode='folio'] .stack-group:nth-child(odd) {
+    border-right: 1px solid var(--border);
+  }
+}
+
+html[data-ui-mode='folio'] .stack-group {
   border-bottom: 1px solid var(--border);
   border-radius: 0;
-  padding: 1.5rem 0;
+  padding: 1.35rem 1rem;
   background: transparent !important;
 
   &:last-child {
@@ -2164,13 +2351,56 @@ html[data-ui-mode="folio"] .badge {
   font-family: $font-mono;
 }
 
-html[data-ui-mode="folio"] .not-found h1,
-html[data-ui-mode="folio"] .not-found a {
+html[data-ui-mode='folio'] .not-found {
+  margin: 2.5rem 0 4rem;
+  padding: 4rem 1.5rem;
+  border: 3px double var(--text-primary);
+  background: var(--bg-secondary-alpha);
+  text-align: center;
+}
+
+html[data-ui-mode='folio'] .not-found h1,
+html[data-ui-mode='folio'] .not-found a {
   font-family: 'Newsreader', 'Noto Serif JP', Georgia, serif;
 }
 
-html[data-ui-mode="folio"] .not-found h1 {
-  font-weight: 300;
+html[data-ui-mode='folio'] .not-found h1 {
+  font-weight: 600;
+  font-size: clamp(4rem, 16vw, 7rem);
+  letter-spacing: -0.06em;
+  line-height: 1;
+  color: var(--text-primary);
+}
+
+html[data-ui-mode='folio'] .not-found p {
+  font-family: 'Newsreader', 'Noto Serif JP', Georgia, serif;
+  font-size: 0.95rem;
+  max-width: 28rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+html[data-ui-mode='folio'] .tags-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(11rem, 1fr));
+  gap: 0;
+  border: 2px solid var(--text-primary);
+}
+
+html[data-ui-mode='folio'] .tags-grid .tag.tag--lg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  border-radius: 0;
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 0.75rem 0.65rem;
+  font-family: 'Newsreader', 'Noto Serif JP', Georgia, serif;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
 }
 
 // --- Folio motion: typewriter caret + list reveals (see static/js/folio-motion.js) ---

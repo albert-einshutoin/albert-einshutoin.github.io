@@ -1640,6 +1640,29 @@ html[data-ui-mode="folio"] .section:has(> .stack-interested) .stack-interested {
   grid-column: 2;
 }
 
+// 日本語: 縦書き+180°回転で「興味あり」が逆さに見えるため、横組に固定（英語は縦ラベルのまま）
+html[lang='ja'][data-ui-mode='folio'] .section:has(> .stack-interested) {
+  grid-template-columns: 1fr;
+}
+
+html[lang='ja'][data-ui-mode='folio'] .section:has(> .stack-interested) .section__header {
+  position: static;
+  grid-column: 1;
+}
+
+html[lang='ja'][data-ui-mode='folio'] .section:has(> .stack-interested) .section__title {
+  writing-mode: horizontal-tb;
+  transform: none;
+  border-right: none;
+  border-bottom: 2px solid var(--accent);
+  padding-right: 0;
+  padding-bottom: 0.35rem;
+}
+
+html[lang='ja'][data-ui-mode='folio'] .section:has(> .stack-interested) .stack-interested {
+  grid-column: 1;
+}
+
 @media (max-width: 900px) {
   html[data-ui-mode="folio"] .section:has(> .stack-interested) {
     grid-template-columns: 1fr;
